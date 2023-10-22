@@ -32,6 +32,17 @@ class MainActivity {
 
         androidDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1))
 
+
+    }
+
+    @AfterSuite
+    fun quiDriver() {
+        androidDriver.quit()
+    }
+
+    @Test
+    fun testAutorization() {
+
         // обработка ошибок при прокликиваинии элементов в сценарии атворизации по номеру +7 951 055 65 86
         try {
             val element1 = androidDriver.findElement(AppiumBy.xpath("//android.view.View[@content-desc=\"Русский\"]"))
@@ -61,8 +72,8 @@ class MainActivity {
             element9.click()
 
             TimeUnit.SECONDS.sleep(5)
-            val element10 = androidDriver.findElement(AppiumBy.xpath("//*[starts-with(@content-desc,'Введите код из смс')]"))
 
+            val element10 = androidDriver.findElement(AppiumBy.xpath("//*[starts-with(@content-desc,'Введите код из смс')]"))
 
             val fullXPath = element10.getAttribute("content-desc")
             //println("Вывод" + fullXPath)
@@ -85,18 +96,6 @@ class MainActivity {
         /*
         val text = androidDriver.pageSource()
         */
-        TimeUnit.SECONDS.sleep(10)
-
-    }
-
-    @AfterSuite
-    fun quiDriver() {
-        androidDriver.quit()
-    }
-
-    @Test
-    fun testOne() {
-        println("Тест запущен")
         TimeUnit.SECONDS.sleep(10)
     }
 }
