@@ -46,9 +46,9 @@ object AuthorizationScenarios {
             }
         }
     }
-    fun  authorizationApp(telephone: String){
+    private fun  authorizationApp(phone: String){
         clickToElement(Profile.authorizationButton.androidAccessibilityId, LocatorType.ACCESSIBILITY_ID)
-        sendText(Authorization.selectTelephone.androidXPath, LocatorType.XPATH,telephone)
+        sendText(Authorization.selectTelephone.androidXPath, LocatorType.XPATH,phone)
         clickToElement(Authorization.codeButton.androidAccessibilityId, LocatorType.ACCESSIBILITY_ID)
         val fullXPath = getAttribute(Authorization.selectCodeAuthorization.androidXPath, LocatorType.XPATH, "content-desc").substringAfterLast("смс\n")
 

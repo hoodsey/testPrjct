@@ -6,7 +6,7 @@ import screens.MainPage
 import screens.Onboarding
 import java.util.concurrent.TimeUnit
 
-object OnbordingScenarios {
+object OnboardingScenarios {
     fun onboardingTest() {
 
         try {
@@ -17,7 +17,7 @@ object OnbordingScenarios {
             clickToElement(MainPage.rollUpElement.androidAccessibilityId, LocatorType.ACCESSIBILITY_ID)
 
         } catch (e: org.openqa.selenium.NoSuchElementException) {
-            e.printStackTrace() // распечатываем ошибку в консоль
+            e.printStackTrace() //Распечатываем ошибку в консоль
             println("Мы поймали ошибку, и теперь тест не упадет")
 
         }

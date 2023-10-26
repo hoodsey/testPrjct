@@ -1,6 +1,6 @@
 
-import GlobalVarible.androidDriver
-import general_cases_for_tests.OnbordingScenarios.onboardingTest
+import GlobalVariable.androidDriver
+import general_cases_for_tests.OnboardingScenarios.onboardingTest
 import io.appium.java_client.android.AndroidDriver
 import io.appium.java_client.remote.MobileCapabilityType
 import org.openqa.selenium.remote.DesiredCapabilities

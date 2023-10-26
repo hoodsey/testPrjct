@@ -1,7 +1,7 @@
 import io.appium.java_client.android.AndroidDriver
 
 
-object GlobalVarible {
+object GlobalVariable {
 
     lateinit var androidDriver : AndroidDriver
 

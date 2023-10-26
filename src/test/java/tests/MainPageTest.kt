@@ -16,9 +16,7 @@ import screens.MenuApps
 import screens.MenuApps.selectMenuButton
 import screens.Profile.authorizationButton
 
-
 class MainPageTest : MainActivity() {
-
 
     @Test
     fun mainPageTest() {
@@ -30,13 +28,10 @@ class MainPageTest : MainActivity() {
         clickToElement(selectMenuButton.androidXPath, LocatorType.XPATH)
         clickToElement(MenuApps.selectProfileButton.androidXPath, LocatorType.XPATH)
         clickToElement(authorizationButton.androidAccessibilityId, LocatorType.ACCESSIBILITY_ID)
-        sendText(selectTelephone.androidXPath, LocatorType.XPATH,"9510556586")
+        sendText(selectTelephone.androidXPath, LocatorType.XPATH, "9510556586")
         clickToElement(codeButton.androidAccessibilityId, LocatorType.ACCESSIBILITY_ID)
-
-
         val fullXPath = getAttribute(selectCodeAuthorization.androidXPath, LocatorType.XPATH, "content-desc").substringAfterLast("смс\n")
-
-        sendText(selectCodeInsert.className, LocatorType.CLASS_NAME,fullXPath)
+        sendText(selectCodeInsert.className, LocatorType.CLASS_NAME, fullXPath)
 
         clickToElement(MenuApps.selectCatalogButton.androidXPath, LocatorType.XPATH)
 

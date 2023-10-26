@@ -1,4 +1,4 @@
-import GlobalVarible.androidDriver
+import GlobalVariable.androidDriver
 import io.appium.java_client.AppiumBy
 import org.openqa.selenium.WebElement
 import org.openqa.selenium.interactions.Pause
