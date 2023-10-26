@@ -3,7 +3,7 @@ package general_cases_for_tests
 import LocatorType
 import TestFunctions.checkAvailableElement
 import TestFunctions.clickToElement
-import screens.MenuApps.selectCatalogButton
+import screens.MenuApps
 import screens.MenuApps.selectProfileButton
 import screens.Profile
 
@@ -23,14 +23,18 @@ object AuthorizationScenarios {
             // нам нужно получить true, что это сделать, нужно найти элемент, если он не будет
             // найден, то должна обработаться ошибка и установить значение false
 
-            userIsAuthorization = checkAvailableElement("//android.view.View[@content-desc=\"Войти\"]", LocatorType.XPATH)
+            userIsAuthorization = checkAvailableElement("//android.widget.ImageView[@content-desc=\"Выйти\"]", LocatorType.XPATH)
         } catch (e: org.openqa.selenium.NoSuchElementException) {
             userIsAuthorization = false
         }
         when {
-            needAuthorizationUser && userIsAuthorization -> {clickToElement(selectCatalogButton.androidXPath, LocatorType.XPATH)}
-            needAuthorizationUser && !userIsAuthorization -> {clickToElement(Profile.quietButton.androidAccessibilityId, LocatorType.ACCESSIBILITY_ID)}
-            !needAuthorizationUser && userIsAuthorization -> {}
+            // нужна авторизация и есть кнопка выйти в профиле(авторизован)
+            needAuthorizationUser && userIsAuthorization -> {}
+            //нужна авторизация и кнопке выйти нет(неавторизован)  -> переход к каталогу
+            needAuthorizationUser && !userIsAuthorization -> {clickToElement(MenuApps.selectCatalogButton.androidXPath, LocatorType.XPATH)}
+            //не нужна авторизация, но есть кнопка выйти в профиле(авторизован) -> клик по кнопке выйти
+            !needAuthorizationUser && userIsAuthorization -> {clickToElement(Profile.quietButton.androidAccessibilityId, LocatorType.ACCESSIBILITY_ID)}
+            //не нужна авторизация и не авторизован
             !needAuthorizationUser && !userIsAuthorization -> {}
         }
     }

@@ -42,6 +42,6 @@ class MainPageTest : MainActivity() {
 
         checkAuthorizationUser(true)
         clickToElement(MenuApps.selectCatalogButton.androidXPath, LocatorType.XPATH)
-
+        TimeUnit.SECONDS.sleep(10)
     }
 }
