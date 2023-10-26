@@ -1,16 +1,13 @@
 
 import GlobalVarible.androidDriver
-import TestFunctions.clickToElement
+import general_cases_for_tests.OnbordingScenarios.onboardingTest
 import io.appium.java_client.android.AndroidDriver
 import io.appium.java_client.remote.MobileCapabilityType
 import org.openqa.selenium.remote.DesiredCapabilities
 import org.testng.annotations.*
-import screens.MainPage
-import screens.Onboarding
 import java.net.URL
 import java.time.Duration
 import java.util.concurrent.TimeUnit
-
 
 open class MainActivity {
 
@@ -32,24 +29,10 @@ open class MainActivity {
 
         androidDriver = AndroidDriver(url, capabilities)
 
-        androidDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1))
-
+        androidDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(6))
+        onboardingTest()
     }
-    fun onboardingTest() {
 
-        try {
-            clickToElement(Onboarding.selectRusButton.androidXPath, LocatorType.XPATH)
-            clickToElement(Onboarding.nextButton.androidAccessibilityId, LocatorType.ACCESSIBILITY_ID)
-
-            TimeUnit.SECONDS.sleep(10)
-            clickToElement(MainPage.rollUpElement.androidAccessibilityId, LocatorType.ACCESSIBILITY_ID)
-
-        } catch (e: org.openqa.selenium.NoSuchElementException) {
-            e.printStackTrace() // распечатываем ошибку в консоль
-            println("Мы поймали ошибку, и теперь тест не упадет")
-
-        }
-    }
 
     @AfterSuite
     fun quiDriver() {
@@ -58,7 +41,6 @@ open class MainActivity {
 
     @BeforeClass
     fun beforeClass() {
-        onboardingTest()
 
     }
     @AfterClass
