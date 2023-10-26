@@ -5,6 +5,7 @@ import TestFunctions.checkAvailableElement
 import TestFunctions.clickToElement
 import screens.MenuApps.selectCatalogButton
 import screens.MenuApps.selectProfileButton
+import screens.Profile
 
 
 object AuthorizationScenarios {
@@ -28,7 +29,7 @@ object AuthorizationScenarios {
         }
         when {
             needAuthorizationUser && userIsAuthorization -> {clickToElement(selectCatalogButton.androidXPath, LocatorType.XPATH)}
-            needAuthorizationUser && !userIsAuthorization -> {}
+            needAuthorizationUser && !userIsAuthorization -> {clickToElement(Profile.quietButton.androidAccessibilityId, LocatorType.ACCESSIBILITY_ID)}
             !needAuthorizationUser && userIsAuthorization -> {}
             !needAuthorizationUser && !userIsAuthorization -> {}
         }

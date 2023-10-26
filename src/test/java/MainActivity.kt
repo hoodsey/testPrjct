@@ -1,9 +1,12 @@
 
 import GlobalVarible.androidDriver
+import TestFunctions.clickToElement
 import io.appium.java_client.android.AndroidDriver
 import io.appium.java_client.remote.MobileCapabilityType
 import org.openqa.selenium.remote.DesiredCapabilities
 import org.testng.annotations.*
+import screens.MainPage
+import screens.Onboarding
 import java.net.URL
 import java.time.Duration
 import java.util.concurrent.TimeUnit
@@ -21,6 +24,7 @@ open class MainActivity {
         capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "Pixel")
         capabilities.setCapability(MobileCapabilityType.APP, "/Users/admin/apps/app-profile.apk")
         capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "uiautomator2")
+        capabilities.setCapability(MobileCapabilityType.NO_RESET, true)
         //capabilites.setCapability(AndroidMobileCapabilityType.APP_PACKAGE, "starter.school.client")
         //capabilites.setCapability(AndroidMobileCapabilityType.APP_ACTIVITY, "starter.school.client.MainActivity")
 
@@ -30,13 +34,21 @@ open class MainActivity {
 
         androidDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1))
 
-        //try cаtсh до тестов
-        // авторизация с 4 условиями (нужен или нет/ авторизован или нет)
-        // создать класс в папке тест/джава
-        // when и прописать условия locator = '' && loctortype = locatortypr.xpath -> {}
-        // needauto && !userloged
+    }
+    fun onboardingTest() {
 
+        try {
+            clickToElement(Onboarding.selectRusButton.androidXPath, LocatorType.XPATH)
+            clickToElement(Onboarding.nextButton.androidAccessibilityId, LocatorType.ACCESSIBILITY_ID)
 
+            TimeUnit.SECONDS.sleep(10)
+            clickToElement(MainPage.rollUpElement.androidAccessibilityId, LocatorType.ACCESSIBILITY_ID)
+
+        } catch (e: org.openqa.selenium.NoSuchElementException) {
+            e.printStackTrace() // распечатываем ошибку в консоль
+            println("Мы поймали ошибку, и теперь тест не упадет")
+
+        }
     }
 
     @AfterSuite
@@ -46,6 +58,7 @@ open class MainActivity {
 
     @BeforeClass
     fun beforeClass() {
+        onboardingTest()
 
     }
     @AfterClass
