@@ -28,9 +28,10 @@ open class MainActivity {
         val url = URL("http://127.0.0.1:4723/")
 
         androidDriver = AndroidDriver(url, capabilities)
-
         androidDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(6))
+
         onboardingTest()
+
     }
 
 

@@ -15,7 +15,6 @@ import screens.Authorization.selectTelephone
 import screens.MenuApps
 import screens.MenuApps.selectMenuButton
 import screens.Profile.authorizationButton
-import java.util.concurrent.TimeUnit
 
 
 class MainPageTest : MainActivity() {
@@ -33,14 +32,13 @@ class MainPageTest : MainActivity() {
         clickToElement(authorizationButton.androidAccessibilityId, LocatorType.ACCESSIBILITY_ID)
         sendText(selectTelephone.androidXPath, LocatorType.XPATH,"9510556586")
         clickToElement(codeButton.androidAccessibilityId, LocatorType.ACCESSIBILITY_ID)
-        TimeUnit.SECONDS.sleep(2)
+
 
         val fullXPath = getAttribute(selectCodeAuthorization.androidXPath, LocatorType.XPATH, "content-desc").substringAfterLast("смс\n")
 
         sendText(selectCodeInsert.className, LocatorType.CLASS_NAME,fullXPath)
-        TimeUnit.SECONDS.sleep(2)
 
         clickToElement(MenuApps.selectCatalogButton.androidXPath, LocatorType.XPATH)
-        TimeUnit.SECONDS.sleep(2)
+
     }
 }

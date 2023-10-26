@@ -60,4 +60,5 @@ object TestFunctions {
             LocatorType.CLASS_NAME -> androidDriver.findElement(AppiumBy.className(locator))
         }
     }
+
 }
