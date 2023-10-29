@@ -1,5 +1,8 @@
+
 import GlobalVariable.androidDriver
 import io.appium.java_client.AppiumBy
+import org.openqa.selenium.Dimension
+import org.openqa.selenium.Point
 import org.openqa.selenium.WebElement
 import org.openqa.selenium.interactions.Pause
 import org.openqa.selenium.interactions.PointerInput
@@ -11,6 +14,12 @@ object TestFunctions {
     fun clickToElement(locator: String = "", locatorType: LocatorType) {
         val element = findElement(locator, locatorType)
         element.click()
+    }
+    fun clickToElementForIndex(locator: String = "", locatorType: LocatorType, index: Int) {
+        val elements: List<WebElement> = findElementsList(locator, locatorType)
+        if (index < elements.size) {
+            elements[index].click()
+        }
     }
 
     fun sendText(locator: String, locatorType: LocatorType, text: String) {
@@ -63,6 +72,54 @@ object TestFunctions {
             LocatorType.ACCESSIBILITY_ID -> androidDriver.findElement(AppiumBy.accessibilityId(locator))
             LocatorType.CLASS_NAME -> androidDriver.findElement(AppiumBy.className(locator))
         }
+    }
+    private fun findElementsList(locator: String, locatorType: LocatorType):  List<WebElement> {
+        return when (locatorType) {
+            LocatorType.ID -> androidDriver.findElements(AppiumBy.id(locator))
+            LocatorType.XPATH -> androidDriver.findElements(AppiumBy.xpath(locator))
+            LocatorType.ACCESSIBILITY_ID -> androidDriver.findElements(AppiumBy.accessibilityId(locator))
+            LocatorType.CLASS_NAME -> androidDriver.findElements(AppiumBy.className(locator))
+        }
+    }
+
+    fun swipeScreenLeft(locator: String, locatorType: LocatorType) {
+        val element = findElement(locator, locatorType)
+        val size = element.size
+        val location = element.location
+        // Вычисление начальных и конечных координат свайпа
+        val startX = location.x + size.width
+        val startY = location.y + size.height / 2
+        val endX =  0
+        val endY = startY
+        swipeOnScreen(startX,startY,endX,endY)
+    }
+    fun swipeElementDown(locator: String, locatorType: LocatorType) {
+        val element = findElement(locator, locatorType)
+        val size = element.size
+        val location = element.location
+        // Вычисление начальных и конечных координат свайпа
+        val startX = location.x + size.width/2
+        val startY = location.y
+        val endX =  startX
+        val endY = location.y +size.height
+        swipeOnScreen(startX,startY,endX,endY)
+    }
+    fun tapByElement(locator: String, locatorType: LocatorType) {
+        val element = findElement(locator, locatorType)
+        val size = element.size
+        val location = element.location
+        tapByCoordinates(location.x+(size.width/2),  location.y+(size.height/2))
+    }
+    fun findCoordinates(locator: String, locatorType: LocatorType):  Point{
+        val element = findElement(locator, locatorType)
+        return element.location
+    }
+    fun findWidthScreen():  Int{
+        return androidDriver.manage().window().size.getWidth()
+    }
+    fun findSizeElement(locator: String, locatorType: LocatorType): Dimension {
+        val element = findElement(locator, locatorType)
+        return element.size
     }
 
 }

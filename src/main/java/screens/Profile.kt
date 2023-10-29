@@ -9,4 +9,8 @@ object Profile {
             androidAccessibilityId = "Выйти",
             elementName = "Кнопка выхода из профиля"
     )
+    val addressButton = ScreenConstructor(
+            androidAccessibilityId = "Мои адреса",
+            elementName = "Кнопка выхода из профиля"
+    )
 }

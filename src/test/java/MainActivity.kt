@@ -51,7 +51,7 @@ open class MainActivity {
     @BeforeMethod
     fun launceApp(){
         androidDriver.activateApp(BUNDLE_ID)
-        TimeUnit.SECONDS.sleep(10)
+        TimeUnit.SECONDS.sleep(5)
 
 
     }

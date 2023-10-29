@@ -32,6 +32,7 @@ object AuthorizationScenarios {
             }
             //нужна авторизация и кнопке выйти нет(неавторизован)  -> авторизация + переход к каталогу
             needAuthorizationUser && !userIsAuthorization -> {
+                clickToElement(Profile.authorizationButton.androidAccessibilityId, LocatorType.ACCESSIBILITY_ID)
                 authorizationApp( "9510556586")
                 clickToElement(selectCatalogButton.androidXPath, LocatorType.XPATH)
             }
@@ -46,12 +47,10 @@ object AuthorizationScenarios {
             }
         }
     }
-    private fun  authorizationApp(phone: String){
-        clickToElement(Profile.authorizationButton.androidAccessibilityId, LocatorType.ACCESSIBILITY_ID)
+    fun authorizationApp(phone: String){
         sendText(Authorization.selectTelephone.androidXPath, LocatorType.XPATH,phone)
         clickToElement(Authorization.codeButton.androidAccessibilityId, LocatorType.ACCESSIBILITY_ID)
         val fullXPath = getAttribute(Authorization.selectCodeAuthorization.androidXPath, LocatorType.XPATH, "content-desc").substringAfterLast("смс\n")
-
         sendText(Authorization.selectCodeInsert.className, LocatorType.CLASS_NAME,fullXPath)
     }
 }
