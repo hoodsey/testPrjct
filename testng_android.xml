@@ -10,6 +10,7 @@
     <test verbose="2" preserve-order="true" name="Android tests" parallel="none">
         <classes>
             <class name="tests.MainPageTest"/>
+            <class name="tests.DeleteAddressTest"/>
         </classes>
     </test>
 </suite>

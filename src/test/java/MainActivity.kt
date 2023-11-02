@@ -1,4 +1,3 @@
-
 import GlobalVariable.androidDriver
 import GlobalVariable.iosDriver
 import GlobalVariable.platformType
@@ -10,6 +9,7 @@ import io.appium.java_client.remote.MobileCapabilityType
 import org.openqa.selenium.remote.DesiredCapabilities
 import org.testng.annotations.*
 import java.net.URL
+import java.time.Duration
 import java.util.concurrent.TimeUnit
 
 open class MainActivity {
@@ -26,7 +26,7 @@ open class MainActivity {
         capabilities.setCapability(MobileCapabilityType.NO_RESET, true)
         if (paramPlatformName == TypeOS.ANDROID) {
             capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "UiAutomator2")
-           // capabilities.setCapability(AndroidMobileCapabilityType.APP_PACKAGE, "starter.school.client")
+            // capabilities.setCapability(AndroidMobileCapabilityType.APP_PACKAGE, "starter.school.client")
             //capabilities.setCapability(AndroidMobileCapabilityType.APP_ACTIVITY, "starter.school.client.MainActivity")
         } else {
             capabilities.setCapability(IOSMobileCapabilityType.WDA_LAUNCH_TIMEOUT, 80000)
@@ -39,8 +39,9 @@ open class MainActivity {
         if (paramPlatformName == TypeOS.IOS) {
             iosDriver = IOSDriver(url, capabilities)
         } else androidDriver = AndroidDriver(url, capabilities)
-
-        //  androidDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(paramTimeToSearchElement))
+        if (paramPlatformName == TypeOS.IOS) {
+            iosDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10))
+        } else androidDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(paramTimeToSearchElement))
 
         platformType = paramPlatformName
 
@@ -93,6 +94,7 @@ open class MainActivity {
             TypeOS.IOS -> {
                 iosDriver.activateApp(BUNDLE_ID)
             }
+
             TypeOS.ANDROID -> {
                 androidDriver.activateApp(BUNDLE_ID)
             }
@@ -108,6 +110,7 @@ open class MainActivity {
             TypeOS.IOS -> {
                 iosDriver.terminateApp(BUNDLE_ID)
             }
+
             TypeOS.ANDROID -> {
                 androidDriver.terminateApp(BUNDLE_ID)
             }

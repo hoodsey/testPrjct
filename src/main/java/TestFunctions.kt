@@ -56,8 +56,14 @@ object TestFunctions {
             element.sendKeys(text)
     }
 
-    fun clearField(locator: String, locatorType: LocatorType) {
-        val element = findElement(locator, locatorType)
+    fun clearField(
+            locatorAndroid: String,
+            locatorTypeAndroid: LocatorType,
+            locatorIOS: String,
+            locatorTypeIOS: LocatorType
+    ) {
+        val findProperty = checkTypeOS(locatorAndroid, locatorTypeAndroid, locatorIOS, locatorTypeIOS)
+        val element = findElement(findProperty.first, findProperty.second)
         element.clear()
     }
 
@@ -91,7 +97,11 @@ object TestFunctions {
         actions.addAction(finger.createPointerMove(ofMillis(0), PointerInput.Origin.viewport(), cordX, cordY))
         actions.addAction(finger.createPointerDown(PointerInput.MouseButton.MIDDLE.asArg()))
         actions.addAction(finger.createPointerUp(PointerInput.MouseButton.MIDDLE.asArg()))
-        androidDriver.perform(listOf(actions))
+        if (platformType == TypeOS.ANDROID) {
+            androidDriver.perform(listOf(actions))
+        } else {
+            iosDriver.perform(listOf(actions))
+        }
     }
 
     //Позволяет сделать свайп по экрану. Нужно ввести координаты начала и окончания свайпа.
@@ -103,7 +113,11 @@ object TestFunctions {
         actions.addAction(Pause(finger, ofMillis(600)))
         actions.addAction(finger.createPointerMove(ofMillis(1000), PointerInput.Origin.viewport(), moveCordX, moveCordY))
         actions.addAction(finger.createPointerUp(PointerInput.MouseButton.MIDDLE.asArg()))
-        androidDriver.perform(listOf(actions))
+        if (platformType == TypeOS.ANDROID) {
+            androidDriver.perform(listOf(actions))
+        } else {
+            iosDriver.perform(listOf(actions))
+        }
     }
 
 
@@ -140,8 +154,14 @@ object TestFunctions {
           }
       }*/
 
-    fun swipeScreenLeft(locator: String, locatorType: LocatorType) {
-        val element = findElement(locator, locatorType)
+    fun swipeScreenLeft(
+            locatorAndroid: String,
+            locatorTypeAndroid: LocatorType,
+            locatorIOS: String,
+            locatorTypeIOS: LocatorType
+    ) {
+        val findProperty = checkTypeOS(locatorAndroid, locatorTypeAndroid, locatorIOS, locatorTypeIOS)
+        val element = findElement(findProperty.first, findProperty.second)
         val size = element.size
         val location = element.location
         // Вычисление начальных и конечных координат свайпа
@@ -152,8 +172,14 @@ object TestFunctions {
         swipeOnScreen(startX, startY, endX, endY)
     }
 
-    fun swipeElementDown(locator: String, locatorType: LocatorType) {
-        val element = findElement(locator, locatorType)
+    fun swipeElementDown(
+            locatorAndroid: String,
+            locatorTypeAndroid: LocatorType,
+            locatorIOS: String,
+            locatorTypeIOS: LocatorType
+    ) {
+        val findProperty = checkTypeOS(locatorAndroid, locatorTypeAndroid, locatorIOS, locatorTypeIOS)
+        val element = findElement(findProperty.first, findProperty.second)
         val size = element.size
         val location = element.location
         // Вычисление начальных и конечных координат свайпа
@@ -177,11 +203,19 @@ object TestFunctions {
     }
 
     fun findWidthScreen(): Int {
-        return androidDriver.manage().window().size.getWidth()
+        if (platformType == TypeOS.ANDROID) {
+            return androidDriver.manage().window().size.getWidth()
+        } else {
+            return iosDriver.manage().window().size.getWidth()
+        }
     }
 
-    fun findSizeElement(locator: String, locatorType: LocatorType): Dimension {
-        val element = findElement(locator, locatorType)
+    fun findSizeElement(locatorAndroid: String,
+                        locatorTypeAndroid: LocatorType,
+                        locatorIOS: String,
+                        locatorTypeIOS: LocatorType): Dimension {
+        val findProperty = checkTypeOS(locatorAndroid, locatorTypeAndroid, locatorIOS, locatorTypeIOS)
+        val element = findElement(findProperty.first, findProperty.second)
         return element.size
     }
 
