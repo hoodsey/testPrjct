@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite for Android">
+    <parameter name="paramPlatformName" value="ANDROID"/>
+    <parameter name="paramPlatformVersion" value="13.0"/>
+    <parameter name="paramDeviceName" value="Pixel 7 API 33 2"/>
+    <parameter name="paramUDID" value=""/>
+    <parameter name="paramTimeToSearchElement" value="6"/>
+    <parameter name="paramPathToApp" value="/Users/admin/apps/app-profile.apk"/>
+    <test verbose="2" preserve-order="true" name="Android tests" parallel="none">
+        <classes>
+            <class name="tests.MainPageTest"/>
+        </classes>
+    </test>
+</suite>
