@@ -69,16 +69,9 @@ object TestFunctions {
             text: String): String {
         val findProperty = checkTypeOS(locatorAndroid, locatorTypeAndroid, locatorIOS, locatorTypeIOS)
         val element = findElement(findProperty.first, findProperty.second)
-        println(findProperty.second)
-        when (findProperty.second) {
-           locatorTypeIOS -> {
-               return element.getAttribute("name")
-           }
-           locatorTypeAndroid -> {
-                return element.getAttribute("content-desc")
-           }  else -> { return "" }
-       }
+        return element.getAttribute(text)
     }
+
 
     fun checkAvailableElement(
             locatorAndroid: String,

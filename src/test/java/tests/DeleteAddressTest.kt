@@ -8,8 +8,8 @@ class DeleteAddressTest : MainActivity() {
 
         checkAuthorizationUser(true)
         //переход на вкладку "Мои адреса"
-        clickToElement(selectProfileButton.androidXPath, LocatorType.XPATH,, )
-        clickToElement(Profile.addressButton.androidAccessibilityId, LocatorType.ACCESSIBILITY_ID,, )
+     clickToElement(selectProfileButton.androidXPath, LocatorType.XPATH, selectProfileButton.iosClassChain,LocatorType.IOS_CLASS_CHAIN )
+           clickToElement(Profile.addressButton.androidAccessibilityId, LocatorType.ACCESSIBILITY_ID,, )
         //проверка наличия тестового адреса и его удаление
         runCatching {
             checkAvailableElement(Address.ViewNewAddress.androidAccessibilityId, LocatorType.ACCESSIBILITY_ID)

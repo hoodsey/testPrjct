@@ -1,10 +1,12 @@
 package general_cases_for_tests
 
+import GlobalVariable.platformType
 import LocatorType
 import TestFunctions.checkAvailableElement
 import TestFunctions.clickToElement
 import TestFunctions.getAttribute
 import TestFunctions.sendText
+import TypeOS
 import screens.Authorization.codeButton
 import screens.Authorization.selectCodeAuthorization
 import screens.Authorization.selectCodeInsert
@@ -53,8 +55,18 @@ object AuthorizationScenarios {
     fun authorizationApp(phone: String){
         sendText(selectTelephone.androidXPath, LocatorType.XPATH, selectTelephone.iosXPath,LocatorType.XPATH,phone)
         clickToElement(codeButton.androidAccessibilityId, LocatorType.ACCESSIBILITY_ID, codeButton.iosAccessibilityId, LocatorType.ACCESSIBILITY_ID )
-        val fullXPath = getAttribute(selectCodeAuthorization.androidXPath, LocatorType.XPATH, selectCodeAuthorization.iosXPath, LocatorType.XPATH, "content-desc").substringBefore("\n+7").substringAfterLast("смс\n")
+        var fullXPath = "";
+        when (platformType) {
+            TypeOS.IOS -> {
+                 fullXPath = getAttribute(selectCodeAuthorization.androidXPath, LocatorType.XPATH, selectCodeAuthorization.iosXPath, LocatorType.XPATH, "name").substringBefore("\n+7").substringAfterLast("смс\n")
+
+            }
+            TypeOS.ANDROID -> {
+                fullXPath = getAttribute(selectCodeAuthorization.androidXPath, LocatorType.XPATH, selectCodeAuthorization.iosXPath, LocatorType.XPATH, "content-desc").substringBefore("\n+7").substringAfterLast("смс\n")
+            }
+        }
         println(fullXPath)
         sendText(selectCodeInsert.className, LocatorType.CLASS_NAME, selectCodeInsert.iosClassChain,LocatorType.IOS_CLASS_CHAIN ,fullXPath)
+
     }
 }
