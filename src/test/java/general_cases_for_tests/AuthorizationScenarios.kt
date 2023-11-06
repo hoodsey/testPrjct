@@ -62,7 +62,8 @@ object AuthorizationScenarios {
             }
 
             TypeOS.ANDROID -> {
-                codeAuth = auth.getAttributeCodeAuthElement("content-desc").substringAfterLast("смс\n").substringBefore("\n+7")
+                codeAuth = auth.getAttributeCodeAuthElement("content-desc").substringAfterLast("смс\n")
+                codeAuth.substringBefore("\n+7")
             }
         }
         // вставка кода

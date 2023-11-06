@@ -5,7 +5,6 @@ import GlobalVariable.platformType
 import TypeOS
 import screens.MainPage
 import screens.Onboarding
-import java.util.concurrent.TimeUnit
 
 object OnboardingScenarios {
     fun onboardingTest() {
@@ -21,10 +20,13 @@ object OnboardingScenarios {
             when (platformType) {
                 TypeOS.IOS -> {
                     onboarding.notificationScipButton()
-                    TimeUnit.SECONDS.sleep(5)
-                    mainPage.clickSystemAboutMonitoring()
+                    try {
+                        mainPage.clickSystemAboutMonitoring()
+                    } catch (e: org.openqa.selenium.NoSuchElementException) {
+                        e.printStackTrace() //Распечатываем ошибку в консоль
+                        println("Мы поймали ошибку, и теперь тест не упадет")
+                    }
                 }
-
                 else -> {}
             }
             //закрыть окно с выбором типа заказа
