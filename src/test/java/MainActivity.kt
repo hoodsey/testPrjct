@@ -109,7 +109,7 @@ open class MainActivity {
         capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, paramPlatformVersion)
         capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, paramDeviceName)
         capabilities.setCapability(MobileCapabilityType.APP, paramPathToApp)
-        //capabilities.setCapability(MobileCapabilityType.NO_RESET, true)
+        capabilities.setCapability(MobileCapabilityType.NO_RESET, true)
         if (paramPlatformName == TypeOS.ANDROID) {
             capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "UiAutomator2")
             // capabilities.setCapability(AndroidMobileCapabilityType.APP_PACKAGE, "starter.school.client")
