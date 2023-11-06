@@ -14,39 +14,6 @@ import java.util.concurrent.TimeUnit
 
 open class MainActivity {
 
-    fun initialCapabilities(paramPlatformName: TypeOS, paramPlatformVersion: String,
-                            paramDeviceName: String, paramUDID: String,
-                            paramTimeToSearchElement: Long, paramPathToApp: String) {
-        val capabilities = DesiredCapabilities()
-
-        capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, paramPlatformName)
-        capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, paramPlatformVersion)
-        capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, paramDeviceName)
-        capabilities.setCapability(MobileCapabilityType.APP, paramPathToApp)
-        capabilities.setCapability(MobileCapabilityType.NO_RESET, true)
-        if (paramPlatformName == TypeOS.ANDROID) {
-            capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "UiAutomator2")
-            // capabilities.setCapability(AndroidMobileCapabilityType.APP_PACKAGE, "starter.school.client")
-            //capabilities.setCapability(AndroidMobileCapabilityType.APP_ACTIVITY, "starter.school.client.MainActivity")
-        } else {
-            capabilities.setCapability(IOSMobileCapabilityType.WDA_LAUNCH_TIMEOUT, 80000)
-            capabilities.setCapability(IOSMobileCapabilityType.COMMAND_TIMEOUTS, 50000)
-            capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "XCUITest")
-        }
-
-        val url = URL("http://127.0.0.1:4723/")
-
-        if (paramPlatformName == TypeOS.IOS) {
-            iosDriver = IOSDriver(url, capabilities)
-        } else androidDriver = AndroidDriver(url, capabilities)
-        if (paramPlatformName == TypeOS.IOS) {
-            iosDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10))
-        } else androidDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(paramTimeToSearchElement))
-
-        platformType = paramPlatformName
-
-    }
-
     @BeforeSuite
     @Parameters(
             value = ["paramPlatformName", "paramPlatformVersion", "paramDeviceName",
@@ -57,8 +24,20 @@ open class MainActivity {
                       paramDeviceName: String, paramUDID: String,
                       paramTimeToSearchElement: Long, paramPathToApp: String
     ) {
-        initialCapabilities(paramPlatformName, paramPlatformVersion, paramDeviceName,
+
+        capabilities = initialCapabilities(paramPlatformName, paramPlatformVersion, paramDeviceName,
                 paramUDID, paramTimeToSearchElement, paramPathToApp)
+
+        val url = URL("http://127.0.0.1:4723/")
+
+        if (paramPlatformName == TypeOS.IOS) {
+            iosDriver = IOSDriver(url, capabilities)
+        } else androidDriver = AndroidDriver(url, capabilities)
+        if (paramPlatformName == TypeOS.IOS) {
+            iosDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(paramTimeToSearchElement))
+        } else androidDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(paramTimeToSearchElement))
+
+        platformType = paramPlatformName
 
         onboardingTest()
 
@@ -121,5 +100,27 @@ open class MainActivity {
         const val BUNDLE_ID = "starter.school.client"
     }
 
+    private fun initialCapabilities(paramPlatformName: TypeOS, paramPlatformVersion: String,
+                                    paramDeviceName: String, paramUDID: String,
+                                    paramTimeToSearchElement: Long, paramPathToApp: String): DesiredCapabilities {
 
+        capabilities = DesiredCapabilities()
+        capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, paramPlatformName)
+        capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, paramPlatformVersion)
+        capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, paramDeviceName)
+        capabilities.setCapability(MobileCapabilityType.APP, paramPathToApp)
+        capabilities.setCapability(MobileCapabilityType.NO_RESET, true)
+        if (paramPlatformName == TypeOS.ANDROID) {
+            capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "UiAutomator2")
+            // capabilities.setCapability(AndroidMobileCapabilityType.APP_PACKAGE, "starter.school.client")
+            //capabilities.setCapability(AndroidMobileCapabilityType.APP_ACTIVITY, "starter.school.client.MainActivity")
+        } else {
+            capabilities.setCapability(IOSMobileCapabilityType.WDA_LAUNCH_TIMEOUT, 80000)
+            capabilities.setCapability(IOSMobileCapabilityType.COMMAND_TIMEOUTS, 50000)
+            capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "XCUITest")
+        }
+        return capabilities
+    }
+
+    private lateinit var capabilities: DesiredCapabilities
 }

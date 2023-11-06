@@ -1,4 +1,4 @@
-enum class LocatorType{
+enum class LocatorType {
     ID,
     XPATH,
     ACCESSIBILITY_ID,
@@ -6,7 +6,8 @@ enum class LocatorType{
     IOS_CLASS_CHAIN,
     IOS_PREDICATE_STRING
 }
-enum class TypeOS{
+
+enum class TypeOS {
     ANDROID,
     IOS
 }

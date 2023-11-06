@@ -1,30 +1,39 @@
 package general_cases_for_tests
 
-import LocatorType
-import TestFunctions.clickToElement
-import screens.MainPage.rollUpElement
-import screens.MainPage.systemAboutMonitoring
-import screens.Onboarding.nextButton
-import screens.Onboarding.notificationScipButton
-import screens.Onboarding.selectRusButton
+
+import GlobalVariable.platformType
+import TypeOS
+import screens.MainPage
+import screens.Onboarding
 import java.util.concurrent.TimeUnit
 
 object OnboardingScenarios {
     fun onboardingTest() {
-
+        // инициализация классов
+        val onboarding = Onboarding()
+        val mainPage = MainPage()
+        // обработка ошибки запуска приложения не с нуля
         try {
-            TimeUnit.SECONDS.sleep(2)
-            clickToElement(selectRusButton.androidXPath, LocatorType.XPATH, selectRusButton.iosAccessibilityId,LocatorType.ACCESSIBILITY_ID)
-            clickToElement(nextButton.androidAccessibilityId, LocatorType.ACCESSIBILITY_ID, nextButton.iosAccessibilityId,LocatorType.ACCESSIBILITY_ID)
-            TimeUnit.SECONDS.sleep(2)
-            clickToElement("", LocatorType.XPATH, notificationScipButton.iosAccessibilityId,LocatorType.ACCESSIBILITY_ID  )
-            clickToElement("",LocatorType.XPATH,systemAboutMonitoring.iosClassChain, LocatorType.IOS_CLASS_CHAIN)
-            clickToElement(rollUpElement.androidAccessibilityId, LocatorType.ACCESSIBILITY_ID, rollUpElement.iosAccessibilityId,LocatorType.ACCESSIBILITY_ID)
+            // выбрать русский язык и перейти дальше
+            onboarding.clickRusButton()
+            onboarding.clickNextButton()
+            // условие для обработки системных окон на IOS
+            when (platformType) {
+                TypeOS.IOS -> {
+                    onboarding.notificationScipButton()
+                    TimeUnit.SECONDS.sleep(5)
+                    mainPage.clickSystemAboutMonitoring()
+                }
 
+                else -> {}
+            }
+            //закрыть окно с выбором типа заказа
+            mainPage.clickRollUpElement()
         } catch (e: org.openqa.selenium.NoSuchElementException) {
             e.printStackTrace() //Распечатываем ошибку в консоль
             println("Мы поймали ошибку, и теперь тест не упадет")
 
         }
+
     }
 }

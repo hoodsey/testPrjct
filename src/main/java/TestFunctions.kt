@@ -12,6 +12,7 @@ import java.time.Duration.ofMillis
 
 object TestFunctions {
 
+    //функция выобра по типу ОС пары locator, locatorType
     fun checkTypeOS(locatorAndroid: String,
                     locatorTypeAndroid: LocatorType,
                     locatorIOS: String,
@@ -23,29 +24,33 @@ object TestFunctions {
         }
     }
 
+    // фнукция клика по элементу
     fun clickToElement(
             locatorAndroid: String,
             locatorTypeAndroid: LocatorType,
             locatorIOS: String,
-            locatorTypeIOS: LocatorType
+            locatorTypeIOS: LocatorType,
+            elementName: String
     ) {
         val findProperty = checkTypeOS(locatorAndroid, locatorTypeAndroid, locatorIOS, locatorTypeIOS)
         val element = findElement(findProperty.first, findProperty.second)
         element.click()
     }
+
     /*   fun clickToElementForIndex(locator: String = "", locatorType: LocatorType, index: Int) {
            val elements: List<WebElement> = findElementsList(locator, locatorType)
            if (index < elements.size) {
                elements[index].click()
            }
        }*/
-
+    // функция вствки текста
     fun sendText(
             locatorAndroid: String,
             locatorTypeAndroid: LocatorType,
             locatorIOS: String,
             locatorTypeIOS: LocatorType,
-            text: String) {
+            text: String,
+            elementName: String) {
         val findProperty = checkTypeOS(locatorAndroid, locatorTypeAndroid, locatorIOS, locatorTypeIOS)
         val element = findElement(findProperty.first, findProperty.second)
         if (findProperty.second == locatorTypeIOS) {
@@ -56,34 +61,39 @@ object TestFunctions {
             element.sendKeys(text)
     }
 
+    //функция отчитки поля
     fun clearField(
             locatorAndroid: String,
             locatorTypeAndroid: LocatorType,
             locatorIOS: String,
-            locatorTypeIOS: LocatorType
+            locatorTypeIOS: LocatorType,
+            elementName: String,
     ) {
         val findProperty = checkTypeOS(locatorAndroid, locatorTypeAndroid, locatorIOS, locatorTypeIOS)
         val element = findElement(findProperty.first, findProperty.second)
         element.clear()
     }
 
+    // функция поиска атрибута
     fun getAttribute(
             locatorAndroid: String,
             locatorTypeAndroid: LocatorType,
             locatorIOS: String,
             locatorTypeIOS: LocatorType,
-            text: String): String {
+            elementName: String,
+            attribute: String): String {
         val findProperty = checkTypeOS(locatorAndroid, locatorTypeAndroid, locatorIOS, locatorTypeIOS)
         val element = findElement(findProperty.first, findProperty.second)
-        return element.getAttribute(text)
+        return element.getAttribute(attribute)
     }
 
-
+    //функция проверки наличия элемента
     fun checkAvailableElement(
             locatorAndroid: String,
             locatorTypeAndroid: LocatorType,
             locatorIOS: String,
-            locatorTypeIOS: LocatorType
+            locatorTypeIOS: LocatorType,
+            elementName: String
     ): Boolean {
         val findProperty = checkTypeOS(locatorAndroid, locatorTypeAndroid, locatorIOS, locatorTypeIOS)
         val element = findElement(findProperty.first, findProperty.second)
@@ -120,7 +130,7 @@ object TestFunctions {
         }
     }
 
-
+    // поиск элемента на странице
     private fun findElement(locator: String, locatorType: LocatorType): WebElement {
         return when (locatorType) {
             LocatorType.ID ->
@@ -145,6 +155,7 @@ object TestFunctions {
 
         }
     }
+
     /*  private fun findElementsList(locator: String, locatorType: LocatorType):  List<WebElement> {
           return when (locatorType) {
               LocatorType.ID -> androidDriver.findElements(AppiumBy.id(locator))
@@ -153,12 +164,13 @@ object TestFunctions {
               LocatorType.CLASS_NAME -> androidDriver.findElements(AppiumBy.className(locator))
           }
       }*/
-
+    // свайп по элемнту в лево
     fun swipeScreenLeft(
             locatorAndroid: String,
             locatorTypeAndroid: LocatorType,
             locatorIOS: String,
-            locatorTypeIOS: LocatorType
+            locatorTypeIOS: LocatorType,
+            elementName: String,
     ) {
         val findProperty = checkTypeOS(locatorAndroid, locatorTypeAndroid, locatorIOS, locatorTypeIOS)
         val element = findElement(findProperty.first, findProperty.second)
@@ -172,11 +184,13 @@ object TestFunctions {
         swipeOnScreen(startX, startY, endX, endY)
     }
 
+    // свайп по элемнту вниз
     fun swipeElementDown(
             locatorAndroid: String,
             locatorTypeAndroid: LocatorType,
             locatorIOS: String,
-            locatorTypeIOS: LocatorType
+            locatorTypeIOS: LocatorType,
+            elementName: String,
     ) {
         val findProperty = checkTypeOS(locatorAndroid, locatorTypeAndroid, locatorIOS, locatorTypeIOS)
         val element = findElement(findProperty.first, findProperty.second)
@@ -190,6 +204,7 @@ object TestFunctions {
         swipeOnScreen(startX, startY, endX, endY)
     }
 
+    // тап по элементу
     fun tapByElement(locator: String, locatorType: LocatorType) {
         val element = findElement(locator, locatorType)
         val size = element.size
@@ -197,11 +212,20 @@ object TestFunctions {
         tapByCoordinates(location.x + (size.width / 2), location.y + (size.height / 2))
     }
 
-    fun findCoordinates(locator: String, locatorType: LocatorType): Point {
-        val element = findElement(locator, locatorType)
+    // найти координаты элемента
+    fun findCoordinates(
+            locatorAndroid: String,
+            locatorTypeAndroid: LocatorType,
+            locatorIOS: String,
+            locatorTypeIOS: LocatorType,
+            elementName: String,
+    ): Point {
+        val findProperty = checkTypeOS(locatorAndroid, locatorTypeAndroid, locatorIOS, locatorTypeIOS)
+        val element = findElement(findProperty.first, findProperty.second)
         return element.location
     }
 
+    // найти ширину экрана
     fun findWidthScreen(): Int {
         if (platformType == TypeOS.ANDROID) {
             return androidDriver.manage().window().size.getWidth()
@@ -210,10 +234,12 @@ object TestFunctions {
         }
     }
 
+    // найти размеры элемента
     fun findSizeElement(locatorAndroid: String,
                         locatorTypeAndroid: LocatorType,
                         locatorIOS: String,
-                        locatorTypeIOS: LocatorType): Dimension {
+                        locatorTypeIOS: LocatorType,
+                        elementName: String): Dimension {
         val findProperty = checkTypeOS(locatorAndroid, locatorTypeAndroid, locatorIOS, locatorTypeIOS)
         val element = findElement(findProperty.first, findProperty.second)
         return element.size

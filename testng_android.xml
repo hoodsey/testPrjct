@@ -3,14 +3,15 @@
 <suite name="All Test Suite for Android">
     <parameter name="paramPlatformName" value="ANDROID"/>
     <parameter name="paramPlatformVersion" value="13.0"/>
-    <parameter name="paramDeviceName" value="Pixel 7 API 33 2"/>
+    <parameter name="paramDeviceName" value="Pixel"/>
     <parameter name="paramUDID" value=""/>
     <parameter name="paramTimeToSearchElement" value="6"/>
     <parameter name="paramPathToApp" value="/Users/admin/apps/app-profile.apk"/>
     <test verbose="2" preserve-order="true" name="Android tests" parallel="none">
         <classes>
-            <class name="tests.MainPageTest"/>
+            <class name="tests.AuthorizationTest"/>
             <class name="tests.DeleteAddressTest"/>
+            <class name="tests.DeliveryWithOutAuthTest"/>
         </classes>
     </test>
 </suite>

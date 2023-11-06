@@ -9,7 +9,7 @@ data class ScreenConstructor(
         val iosAccessibilityId: String = "",
         val iosId: String = "",
         val iosXPath: String = "",
-        val iosClassChain:String = "",
+        val iosClassChain: String = "",
         val iosPredicateString: String = ""
 )
 // для хранения информации и уменьшить расход памяти
