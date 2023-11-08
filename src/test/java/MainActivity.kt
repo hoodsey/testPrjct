@@ -119,5 +119,6 @@ open class MainActivity {
         }
         return capabilities
     }
+
     private lateinit var capabilities: DesiredCapabilities
 }

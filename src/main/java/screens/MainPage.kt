@@ -25,6 +25,7 @@ class MainPage {
                 elementName = locatorMap[MaimPageElements.ROLL_UP_ELEMENT_ELEMENT_NAME].toString(),
         )
     }
+
     public fun clickToSoupCategory() {
         clickToElement(
                 locatorAndroid = locatorMap[MaimPageElements.SOUP_CATEGORY_ANDROID].toString(),
@@ -34,6 +35,7 @@ class MainPage {
                 elementName = locatorMap[MaimPageElements.SOUP_CATEGORY_ELEMENT_NAME].toString(),
         )
     }
+
     public fun addBorschInCart() {
         clickToElement(
                 locatorAndroid = locatorMap[MaimPageElements.ADD_BORSCH_IN_CART_ANDROID].toString(),
@@ -43,6 +45,7 @@ class MainPage {
                 elementName = locatorMap[MaimPageElements.ADD_BORSCH_IN_CART_ELEMENT_NAME].toString(),
         )
     }
+
     public fun goOverCart() {
         clickToElement(
                 locatorAndroid = locatorMap[MaimPageElements.GO_OVER_CART_ANDROID].toString(),
@@ -62,6 +65,7 @@ class MainPage {
                 elementName = locatorMap[MaimPageElements.GO_OVER_CART_ELEMENT_NAME].toString(),
         )
     }
+
     public fun checkViewAddress(): Boolean {
         return checkAvailableElement(
                 locatorAndroid = locatorMap[MaimPageElements.VIEW_ADDRESS_ANDROID].toString(),
@@ -81,6 +85,7 @@ class MainPage {
                 elementName = locatorMap[MaimPageElements.VIEW_ADDRESS_ELEMENT_NAME].toString(),
         )
     }
+
     private enum class MaimPageElements {
         SYSTEM_ABOUT_MONITORING_ANDROID,
         SYSTEM_ABOUT_MONITORING_IOS,
@@ -116,8 +121,8 @@ class MainPage {
             MaimPageElements.ROLL_UP_ELEMENT_IOS to "Закрыть",
             MaimPageElements.ROLL_UP_ELEMENT_ELEMENT_NAME to "Свернуть окно с выбором типа заказа",
 
-            MaimPageElements.SOUP_CATEGORY_ANDROID to  "Супы",
-            MaimPageElements.SOUP_CATEGORY_IOS to  "Супы",
+            MaimPageElements.SOUP_CATEGORY_ANDROID to "Супы",
+            MaimPageElements.SOUP_CATEGORY_IOS to "Супы",
             MaimPageElements.SOUP_CATEGORY_ELEMENT_NAME to "Кнопка перехода к разделу Супы",
 
             MaimPageElements.ADD_BORSCH_IN_CART_ANDROID to "195 ₽",
