@@ -27,6 +27,7 @@ object FillingAddressScenarios {
         //нажать кнопку сохранить адрес
         addressClass.clickToSaveNewAddress()
     }
+
     //функция обрабатывает окно геопозиции
     fun useLocation() {
         val location = Location()
@@ -53,7 +54,7 @@ object FillingAddressScenarios {
         var deleteButtonX = 0
         var deleteButtonY = 0
         deleteButtonX = widthScreens - (widthScreens - addressViewSize.width) / 2
-        deleteButtonY = addressViewCoordinate.y+ addressViewSize.height/2
+        deleteButtonY = addressViewCoordinate.y + addressViewSize.height / 2
         // нажать по вычесленным координатам
         tapByCoordinates(deleteButtonX, deleteButtonY)
     }

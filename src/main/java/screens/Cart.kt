@@ -24,7 +24,7 @@ class Cart {
                 locatorTypeAndroid = LocatorType.ACCESSIBILITY_ID,
                 locatorIOS = preOrderInfo.iosAccessibilityId,
                 locatorTypeIOS = LocatorType.ACCESSIBILITY_ID,
-                elementName =  preOrderInfo.elementName,
+                elementName = preOrderInfo.elementName,
         )
 
     }

@@ -1,16 +1,12 @@
 package tests
 
-import GlobalVariable.platformType
 import MainActivity
-import TestFunctions.tapByCoordinates
-import TypeOS
 import general_cases_for_tests.AuthorizationScenarios.authorizationApp
 import general_cases_for_tests.AuthorizationScenarios.checkAuthorizationUser
-import general_cases_for_tests.FillingAddressScenarios.deleteAddress
+import general_cases_for_tests.DeliveryScenarios.checkShoppingCart
+import general_cases_for_tests.DeliveryScenarios.clickButtonOrder
 import general_cases_for_tests.FillingAddressScenarios.fillingAddress
 import general_cases_for_tests.FillingAddressScenarios.useLocation
-import org.openqa.selenium.Dimension
-import org.openqa.selenium.Point
 import org.testng.annotations.Test
 import screens.Cart
 import screens.MainPage
@@ -29,25 +25,8 @@ class DeliveryWithOutAuthTest : MainActivity() {
         val cart = Cart()
 
         menuApps.selectCatalogButton()
-
-        // если есть товары в корзине, то корзина отчищается
-        runCatching {
-            mainPage.checkAvailableCartButton()
-        }.onSuccess {
-            mainPage.goOverCart()
-            cart.cleanCart()
-
-        }
-        // если задан адрес, то адрес удаляется
-        runCatching {
-            mainPage.checkViewAddress()
-        }.onSuccess {
-            mainPage.clickToAddress()
-            TimeUnit.SECONDS.sleep(2)
-            deleteAddress()
-            useLocation()
-            mainPage.clickRollUpElement()
-        }
+        /* проверка есть ли уже товары в корзине и указан ли адрес */
+        checkShoppingCart(mainPage, cart)
         //выбор блюда
         mainPage.clickToSoupCategory()
         mainPage.addBorschInCart()
@@ -56,27 +35,11 @@ class DeliveryWithOutAuthTest : MainActivity() {
         fillingAddress("Виленский переулок, 6, Санкт-Петербург", "6", "6", "6", "6", "6")
         // переход в коризну
         mainPage.goOverCart()
-        // размер и координаты элемента с информацией о заказе
-        val preOrderInfoSize: Dimension = cart.findSizePreOrderInfo()
-        val preOrderInfoCoordinate: Point = cart.findCoordinatePreOrderInfo()
-        /* расчет координат кнопки оформления заказа */
-        var preOrderButtonX = 0
-        var preOrderButtonY = 0
-        when (platformType) {
-            TypeOS.ANDROID -> {
-                preOrderButtonX = preOrderInfoSize.width / 2
-                preOrderButtonY = preOrderInfoCoordinate.y + preOrderInfoSize.height + preOrderInfoSize.height / 2
-            }
-
-            TypeOS.IOS -> {
-                preOrderButtonX = preOrderInfoSize.width / 2
-                preOrderButtonY = preOrderInfoCoordinate.y + preOrderInfoSize.height / 2 + preOrderInfoSize.height / 4
-            }
-        }
-        //нажать на кнопку по координатам
-        tapByCoordinates(preOrderButtonX, preOrderButtonY)
+        // нажать на кнопку оформления заказа
+        clickButtonOrder(cart)
         //авторизация
         authorizationApp("9510556586")
+        TimeUnit.SECONDS.sleep(2)
         // переход в главное меню
         menuApps.selectCatalogButton()
         menuApps.selectProfileButton()

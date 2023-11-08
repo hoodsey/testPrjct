@@ -164,7 +164,7 @@ object TestFunctions {
               LocatorType.CLASS_NAME -> androidDriver.findElements(AppiumBy.className(locator))
           }
       }*/
-    // свайп по элемнту в лево
+    // свайп по элемнту влево
     fun swipeScreenLeft(
             locatorAndroid: String,
             locatorTypeAndroid: LocatorType,

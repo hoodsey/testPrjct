@@ -38,7 +38,7 @@ class DeleteAddressTest : MainActivity() {
         address.clickAddAddressButton()
         // ввод адреса. Таймайт обязателен, без него иногда крашится
         TimeUnit.SECONDS.sleep(2)
-        fillingAddress("Виленский переулок, 6, Санкт-Петербург", "6", "6", "6", "6", "6")
+        fillingAddress( "Виленский переулок, 6, Санкт-Петербург", "6", "6", "6", "6", "6")
         // проверка наличия нового адреса и его удаление
         if (address.checkViewNewAddress()) {
             deleteAddress()

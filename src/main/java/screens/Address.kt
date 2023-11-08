@@ -53,6 +53,7 @@ class Address {
                 elementName = locatorMap[AddressElements.VIEW_NEW_ADDRESS_ELEMENT_NAME].toString(),
         )
     }
+
     fun findCoordinateViewNewAddress(): Point {
         return findCoordinates(
                 locatorAndroid = locatorMap[AddressElements.VIEW_NEW_ADDRESS_ANDROID].toString(),
@@ -63,6 +64,7 @@ class Address {
         )
 
     }
+
     fun insertAddress(address: String) {
         clickToElement(
                 locatorTypeAndroid = LocatorType.XPATH,

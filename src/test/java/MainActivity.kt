@@ -79,8 +79,6 @@ open class MainActivity {
             }
         }
         TimeUnit.SECONDS.sleep(5)
-
-
     }
 
     @AfterMethod
@@ -121,6 +119,5 @@ open class MainActivity {
         }
         return capabilities
     }
-
     private lateinit var capabilities: DesiredCapabilities
 }

@@ -71,7 +71,7 @@ class Authorization {
             AuthorizationElements.SELECT_PHONE_ANDROID to "//android.view.View[@content-desc=\"Укажите телефон\n" +
                     "На него отправим код подтверждения\"]/android.widget.EditText",
             AuthorizationElements.SELECT_PHONE_IOS to "//XCUIElementTypeTextField",
-                AuthorizationElements.SELECT_PHONE_ELEMENT_NAME to "Элемент в окне авторизации для ввода телефона",
+            AuthorizationElements.SELECT_PHONE_ELEMENT_NAME to "Элемент в окне авторизации для ввода телефона",
 
             AuthorizationElements.SEND_CODE_BUTTON_ANDROID to "Получить код",
             AuthorizationElements.SEND_CODE_BUTTON_IOS to "Получить код",
