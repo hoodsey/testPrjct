@@ -1,32 +1,39 @@
 package tests
 
 import MainActivity
-import TestFunctions.swipeOnScreen
-import general_cases_for_tests.AuthorizationScenarios.authorizationApp
-import general_cases_for_tests.AuthorizationScenarios.checkAuthorizationUser
+import api_client.environment.Environment.environment
+import api_client.requests.auth.AuthResetCode
+import api_client.requests.auth.AuthResetCode.authResetCodeReqBody
+import api_client.specifications.Specifications.installSpecification
+import api_client.specifications.Specifications.requestSpec
 import org.testng.annotations.Test
-import screens.MenuApps
-import screens.Profile
-import java.util.concurrent.TimeUnit
 
 class AuthorizationTest : MainActivity() {
 
     @Test
     fun authorizationTest() {
-        // проверка авторизации
-        checkAuthorizationUser(false)
-        val menuApps = MenuApps()
-        val profile = Profile()
-        // свайп на главной странице
-        menuApps.selectCatalogButton()
-        swipeOnScreen(457, 2074, 450, 375)
-        // переход на вкладку меню
-        menuApps.selectMenuButton()
-        // переход в профиль и авторизация
-        menuApps.selectProfileButton()
-        profile.clickAuthorizationButton()
-        authorizationApp("9510556586")
-        TimeUnit.SECONDS.sleep(2)
-        menuApps.selectCatalogButton()
+        installSpecification(requestSpec(environment.host))
+
+        //Categories.get(mutableMapOf())
+
+
+        AuthResetCode.post( authResetCodeReqBody("79510556586"))
+
+
+        /*  // проверка авторизации
+          chkAuthorizationUser(false)
+          val menuApps = MenuApps()
+          val profile = Profile()
+          // свайп на главной странице
+          menuApps.selectCatalogButton()
+          swipeOnScreen(457, 2074, 450, 375)
+          // переход на вкладку меню
+          menuApps.selectMenuButton()
+          // переход в профиль и авторизация
+          menuApps.selectProfileButton()
+          profile.clickAuthorizationButton()
+          authorizationApp("9510556586")
+          TimeUnit.SECONDS.sleep(2)
+          menuApps.selectCatalogButton()*/
     }
 }

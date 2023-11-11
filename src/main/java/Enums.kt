@@ -11,4 +11,10 @@ enum class TypeOS {
     ANDROID,
     IOS
 }
+
+enum class ResponseType {
+    JSON,
+    HTML
+
+} //  нужен т к в данной ситуации восврашаем html или json
 // класс перечислений локаторов
