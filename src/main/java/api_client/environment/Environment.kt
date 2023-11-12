@@ -2,6 +2,17 @@ package api_client.environment
 
 object Environment {
 
+
+    // функция изменения sessionid
+    fun updateSessionId(newSessionId: String) {
+        environment = environment.copy(sessionId = newSessionId)
+        headers["sessionid"] = newSessionId
+    }
+    fun updateAuthToken(newAuthToken: String) {
+        environment = environment.copy(authToken = newAuthToken)
+        headers["authToken"] = newAuthToken
+    }
+
     var environment = Env()
     val endPoints = EndPoints()
     var headers: MutableMap<String,String> = mutableMapOf(
@@ -29,7 +40,10 @@ object Environment {
             val authCode: String  = "auth/resetCode",
             val login: String  = "auth/login",
             val sessionId: String  = "user/sessionId",
+            val profile: String ="user/v2",
+            val meals: String = "/meals/8c65fc68-dfd9-4591-a8f2-9edf77fbd3fd/v2"
 
 
     )
+
 }

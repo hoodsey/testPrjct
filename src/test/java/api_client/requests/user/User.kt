@@ -7,12 +7,13 @@ import api_client.environment.Environment.endPoints
 import api_client.pojo.user.UserPojo
 import io.restassured.response.Response
 
-object User: Get, Res,UserPojo() {
+object User : Get, Res, UserPojo() {
     override lateinit var resBody: String
 
     override fun getDataFromJSON(response: Response): String {
         return response.body.asString()
     }
+
     override fun get(queryParams: MutableMap<String, String>) {
         val responseJSON = getReq(
                 queryParams = queryParams,
@@ -20,6 +21,7 @@ object User: Get, Res,UserPojo() {
                 responseType = ResponseType.HTML
         )
         resBody = getDataFromJSON(responseJSON)
+
     }
 
 }
