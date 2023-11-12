@@ -9,7 +9,7 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import io.restassured.response.Response
 
-object Categories : Get, Res, CategoriesPojo() {
+object Categories: Get, Res,CategoriesPojo() {
     override lateinit var resBody: List<CategoriesRes>
 
     override fun getDataFromJSON(response: Response): List<CategoriesRes> {
@@ -18,14 +18,13 @@ object Categories : Get, Res, CategoriesPojo() {
         val itemType = object : TypeToken<List<CategoriesRes>>() {}.type
         return gson.fromJson(jsonString, itemType)
     }
-
     override fun get(queryParams: MutableMap<String, String>) {
         val responseJSON = getReq(
                 queryParams = queryParams,
                 endPoint = endPoints.categories,
                 responseType = ResponseType.JSON
         )
-        resBody = getDataFromJSON(responseJSON)
+    resBody = getDataFromJSON(responseJSON)
     }
 
 }

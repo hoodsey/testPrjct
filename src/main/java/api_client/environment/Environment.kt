@@ -18,7 +18,7 @@ object Environment {
     )
     data class Env(
             var authToken: String = "",
-            var sessionId: String = "06522361-c3d9-4e0b-9869-b48ca76e01d0",
+            var sessionId: String = "6f9da34e-85c3-46f5-a9c5-65422f2f2e97",
             val host: String = "https://api.starterapp.ru/school/",
             val shopId: String = "8c65fc68-dfd9-4591-a8f2-9edf77fbd3fd"
 
@@ -27,6 +27,8 @@ object Environment {
     data class EndPoints(
             val categories: String = "categories/8c65fc68-dfd9-4591-a8f2-9edf77fbd3fd/v2",
             val authCode: String  = "auth/resetCode",
+            val login: String  = "auth/login",
+            val sessionId: String  = "user/sessionId",
 
 
     )
