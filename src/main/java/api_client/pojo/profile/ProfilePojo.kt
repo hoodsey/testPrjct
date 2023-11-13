@@ -14,9 +14,9 @@ open class ProfilePojo {
             @SerializedName("email") var email: String? = null,
             @SerializedName("birthDate") var birthDate: String? = null,
             @SerializedName("bonusCardCode") var bonusCardCode: String? = null,
-            //@SerializedName("order") var order: String? = null,
-           // @SerializedName("addresses") var addresses: ArrayList<Any> = arrayListOf(),
-            //@SerializedName("wallet") var wallet:  ArrayList<Any> = arrayListOf(),
-           //@SerializedName("bonusProgram") var bonusProgram: String? = null
+            //@SerializedName("order") var order: ArrayList<Any> = arrayListOf(),
+            @SerializedName("addresses") var addresses: ArrayList<Any> = arrayListOf(),
+            @SerializedName("wallet") var wallet:  ArrayList<Any> = arrayListOf(),
+            @SerializedName("bonusProgram") var bonusProgram: String? = null
     )
 }

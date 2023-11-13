@@ -10,13 +10,14 @@ import com.google.gson.reflect.TypeToken
 import io.restassured.response.Response
 
 object Profile: Get, Res,ProfilePojo() {
-    override lateinit var resBody: List<ProfileRes>
+    override lateinit var resBody: ProfileRes
 
-    override fun getDataFromJSON(response: Response): List<ProfileRes> {
+    override fun getDataFromJSON(response: Response): ProfileRes {
         val jsonString = response.asString()
         val gson = Gson()
-        val itemType = object : TypeToken<ProfileRes?>() {}.type
+        val itemType = object : TypeToken<ProfileRes>() {}.type
         return gson.fromJson(jsonString, itemType)
+
     }
     override fun get(queryParams: MutableMap<String, String>) {
         val responseJSON = getReq(

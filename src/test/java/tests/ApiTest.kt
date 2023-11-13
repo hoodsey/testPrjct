@@ -7,6 +7,7 @@ import api_client.requests.auth.AuthResetCode
 import api_client.requests.auth.Login
 import api_client.requests.categories.Categories
 import api_client.requests.categories.Meals
+import api_client.requests.categories.Profile
 import api_client.requests.categories.User
 import api_client.specifications.Specifications.installSpecification
 import api_client.specifications.Specifications.requestSpec
@@ -16,6 +17,7 @@ class ApiTest {
 
     @Test
     fun apiTest() {
+
         installSpecification(requestSpec(environment.host))
         // Запрос sessionID
         User.get(mutableMapOf())
@@ -31,6 +33,6 @@ class ApiTest {
         updateAuthToken(Login.resBody)
         // запрос меню с главной страницы
         Meals.get(mutableMapOf())
-        //Profile.get(mutableMapOf())
+        Profile.get(mutableMapOf())
     }
 }
