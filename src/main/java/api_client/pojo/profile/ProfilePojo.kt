@@ -421,14 +421,16 @@ open class ProfilePojo {
             @SerializedName("PostalCodeNumber") var PostalCodeNumber: String? = null
 
     )
-    data class AddressYandex (
 
-            @SerializedName("formatted"    ) var formatted   : String?               = null,
-            @SerializedName("Components"   ) var Components  : ArrayList<Components> = arrayListOf(),
-            @SerializedName("postal_code"  ) var postalCode  : String?               = null,
-            @SerializedName("country_code" ) var countryCode : String?               = null
+    data class AddressYandex(
+
+            @SerializedName("formatted") var formatted: String? = null,
+            @SerializedName("Components") var Components: ArrayList<Components> = arrayListOf(),
+            @SerializedName("postal_code") var postalCode: String? = null,
+            @SerializedName("country_code") var countryCode: String? = null
 
     )
+
     data class Premise(
 
             @SerializedName("PostalCode") var PostalCode: PostalCode? = PostalCode(),

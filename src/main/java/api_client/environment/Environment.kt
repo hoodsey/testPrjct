@@ -29,7 +29,7 @@ object Environment {
     )
     data class Env(
             var authToken: String = "",
-            var sessionId: String = "d5389ff3-8b9e-416f-8015-7c793e938bc9",
+            var sessionId: String = "aa009956-0978-4b23-b662-7e43017c405f",
             val host: String = "https://api.starterapp.ru/school/",
             val shopId: String = "8c65fc68-dfd9-4591-a8f2-9edf77fbd3fd"
 

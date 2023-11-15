@@ -32,8 +32,12 @@ class ApiTest {
         updateAuthToken(Login.resBody)
         // запрос меню с главной страницы
         Meals.get(mutableMapOf())
+        // вывод наименования блюда
         println(Meals.resBody[1].name)
+        //запрос данных профиля
         Profile.get(mutableMapOf())
-        Profile.resBody.addresses
+        // вывод адреса из блока "Мои Адреса" в формате "улица Радищева, 32"
+        println(Profile.resBody.addresses[0].street)
+
     }
 }
