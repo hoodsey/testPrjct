@@ -18,7 +18,7 @@ object Login : Post, Res, LoginPojo() {
 
     // Создание body POST запроса
     fun loginReqBody(phone: String, code: String): LoginReqBody {
-        //Thread.sleep(3000);
+        Thread.sleep(3000);
         return LoginReqBody(phone = phone, code = code)
     }
 

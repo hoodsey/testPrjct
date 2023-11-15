@@ -5,7 +5,6 @@ import api_client.environment.Environment.updateAuthToken
 import api_client.environment.Environment.updateSessionId
 import api_client.requests.auth.AuthResetCode
 import api_client.requests.auth.Login
-import api_client.requests.categories.Categories
 import api_client.requests.categories.Meals
 import api_client.requests.categories.Profile
 import api_client.requests.categories.User
@@ -24,7 +23,7 @@ class ApiTest {
         // Изменение параметра sesseionId в окружении
         updateSessionId(User.resBody)
         // запрос списка категорий
-        Categories.get(mutableMapOf())
+        //Categories.get(mutableMapOf())
         // запрос кода авторизации
         AuthResetCode.post(AuthResetCode.authResetCodeReqBody("79510556586"))
         // запрос токена
@@ -33,6 +32,8 @@ class ApiTest {
         updateAuthToken(Login.resBody)
         // запрос меню с главной страницы
         Meals.get(mutableMapOf())
+        println(Meals.resBody[1].name)
         Profile.get(mutableMapOf())
+        Profile.resBody.addresses
     }
 }
