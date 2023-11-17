@@ -9,7 +9,7 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import io.restassured.response.Response
 
-object Profile: Get, Res,ProfilePojo() {
+object ProfileApi: Get, Res,ProfilePojo() {
     override lateinit var resBody: ProfileRes
 
     override fun getDataFromJSON(response: Response): ProfileRes {

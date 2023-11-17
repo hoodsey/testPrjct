@@ -1,6 +1,12 @@
 package tests
 
 import MainActivity
+import api_client.environment.Environment
+import api_client.requests.auth.AuthResetCode
+import api_client.requests.auth.Login
+import api_client.requests.categories.Meals
+import api_client.requests.categories.User
+import api_client.specifications.Specifications
 import general_cases_for_tests.AuthorizationScenarios.authorizationApp
 import general_cases_for_tests.AuthorizationScenarios.checkAuthorizationUser
 import general_cases_for_tests.DeliveryScenarios.checkShoppingCart
@@ -18,6 +24,19 @@ class DeliveryWithOutAuthTest : MainActivity() {
     @Test
     fun deliveryWithOutAuthTest() {
 
+        // инициализация сессии
+        Specifications.installSpecification(Specifications.requestSpec(Environment.environment.host))
+        // Запрос sessionID
+        User.get(mutableMapOf())
+        // Изменение параметра sesseionId в окружении
+        Environment.updateSessionId(User.resBody)
+        // запрос кода авторизации
+        AuthResetCode.post(AuthResetCode.authResetCodeReqBody("79510556586"))
+        // запрос токена
+        Login.post(Login.loginReqBody("79510556586", "3256"))
+        // изменение токена в окружении
+        Environment.updateAuthToken(Login.resBody)
+
         checkAuthorizationUser(false)
 
         val menuApps = MenuApps()
@@ -29,7 +48,19 @@ class DeliveryWithOutAuthTest : MainActivity() {
         checkShoppingCart(mainPage, cart)
         //выбор блюда
         mainPage.clickToSoupCategory()
-        mainPage.addBorschInCart()
+
+        // запрос меню с главной страницы
+        Meals.get(mutableMapOf())
+        // поиск в запросе первого супа
+        for (mealsApi in Meals.resBody) {
+            if (mealsApi.categories[0] == "supy") {
+                mainPage.insertPriceFromApi(mealsApi.price)
+                break
+            }
+        }
+        // добавление в корзину
+        TimeUnit.SECONDS.sleep(5)
+        mainPage.addSoupInCart()
         //разрешение на геопозицию и ввод адреса
         useLocation()
         fillingAddress("Виленский переулок, 6, Санкт-Петербург", "6", "6", "6", "6", "6")

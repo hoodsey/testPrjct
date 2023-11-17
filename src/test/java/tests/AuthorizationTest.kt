@@ -31,3 +31,6 @@ class AuthorizationTest : MainActivity() {
         menuApps.selectCatalogButton()
     }
 }
+
+
+

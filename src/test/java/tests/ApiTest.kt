@@ -5,8 +5,9 @@ import api_client.environment.Environment.updateAuthToken
 import api_client.environment.Environment.updateSessionId
 import api_client.requests.auth.AuthResetCode
 import api_client.requests.auth.Login
+import api_client.requests.categories.Categories
 import api_client.requests.categories.Meals
-import api_client.requests.categories.Profile
+import api_client.requests.categories.ProfileApi
 import api_client.requests.categories.User
 import api_client.specifications.Specifications.installSpecification
 import api_client.specifications.Specifications.requestSpec
@@ -23,7 +24,7 @@ class ApiTest {
         // Изменение параметра sesseionId в окружении
         updateSessionId(User.resBody)
         // запрос списка категорий
-        //Categories.get(mutableMapOf())
+        Categories.get(mutableMapOf())
         // запрос кода авторизации
         AuthResetCode.post(AuthResetCode.authResetCodeReqBody("79510556586"))
         // запрос токена
@@ -35,9 +36,9 @@ class ApiTest {
         // вывод наименования блюда
         println(Meals.resBody[1].name)
         //запрос данных профиля
-        Profile.get(mutableMapOf())
+        ProfileApi.get(mutableMapOf())
         // вывод адреса из блока "Мои Адреса" в формате "улица Радищева, 32"
-        println(Profile.resBody.addresses[0].street)
+        println(ProfileApi.resBody.addresses[0].street)
 
     }
 }

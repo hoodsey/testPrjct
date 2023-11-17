@@ -36,13 +36,13 @@ class MainPage {
         )
     }
 
-    public fun addBorschInCart() {
+    public fun addSoupInCart() {
         clickToElement(
-                locatorAndroid = locatorMap[MaimPageElements.ADD_BORSCH_IN_CART_ANDROID].toString(),
+                locatorAndroid = locatorMap[MaimPageElements.ADD_SOUP_IN_CART_ANDROID].toString(),
                 locatorTypeAndroid = LocatorType.ACCESSIBILITY_ID,
-                locatorIOS = locatorMap[MaimPageElements.ADD_BORSCH_IN_CART_IOS].toString(),
+                locatorIOS = locatorMap[MaimPageElements.ADD_SOUP_IN_CART_IOS].toString(),
                 locatorTypeIOS = LocatorType.ACCESSIBILITY_ID,
-                elementName = locatorMap[MaimPageElements.ADD_BORSCH_IN_CART_ELEMENT_NAME].toString(),
+                elementName = locatorMap[MaimPageElements.ADD_SOUP_IN_CART_ELEMENT_NAME].toString(),
         )
     }
 
@@ -99,9 +99,9 @@ class MainPage {
         SOUP_CATEGORY_IOS,
         SOUP_CATEGORY_ELEMENT_NAME,
 
-        ADD_BORSCH_IN_CART_ANDROID,
-        ADD_BORSCH_IN_CART_IOS,
-        ADD_BORSCH_IN_CART_ELEMENT_NAME,
+        ADD_SOUP_IN_CART_ANDROID,
+        ADD_SOUP_IN_CART_IOS,
+        ADD_SOUP_IN_CART_ELEMENT_NAME,
 
         GO_OVER_CART_ANDROID,
         GO_OVER_CART_IOS,
@@ -110,6 +110,15 @@ class MainPage {
         VIEW_ADDRESS_ANDROID,
         VIEW_ADDRESS_IOS,
         VIEW_ADDRESS_ELEMENT_NAME,
+    }
+
+    fun insertPriceFromApi(
+            price: Int?,
+    ) {
+        val locator = "${price.toString()} ₽"
+        locatorMap[MaimPageElements.ADD_SOUP_IN_CART_ANDROID] = locator
+        locatorMap[MaimPageElements.ADD_SOUP_IN_CART_IOS] = locator
+
     }
 
     private val locatorMap: LinkedHashMap<MainPage.MaimPageElements, String> = linkedMapOf(
@@ -125,14 +134,14 @@ class MainPage {
             MaimPageElements.SOUP_CATEGORY_IOS to "Супы",
             MaimPageElements.SOUP_CATEGORY_ELEMENT_NAME to "Кнопка перехода к разделу Супы",
 
-            MaimPageElements.ADD_BORSCH_IN_CART_ANDROID to "195 ₽",
-            MaimPageElements.ADD_BORSCH_IN_CART_IOS to "195 ₽",
-            MaimPageElements.ADD_BORSCH_IN_CART_ELEMENT_NAME to "Кнопка добавления борща в заказ",
+            MaimPageElements.ADD_SOUP_IN_CART_ANDROID to "",
+            MaimPageElements.ADD_SOUP_IN_CART_IOS to "",
+            MaimPageElements.ADD_SOUP_IN_CART_ELEMENT_NAME to "Кнопка добавления cупа в заказ",
 
             MaimPageElements.GO_OVER_CART_ANDROID to "//*[contains(@content-desc,'Корзина')]",
             MaimPageElements.GO_OVER_CART_IOS to "1\n" +
                     "Корзина\n" +
-                    "195 ₽",
+                    "444 ₽",
             MaimPageElements.GO_OVER_CART_ELEMENT_NAME to "Кнопка перехода в корзину с главного экрана",
 
             MaimPageElements.VIEW_ADDRESS_ANDROID to "Виленский переулок, 6",

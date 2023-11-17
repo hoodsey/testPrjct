@@ -213,6 +213,23 @@ class Address {
         )
     }
 
+    fun insertAddressViewFromApi(
+            street: String?,
+            flat: String?,
+            floor: Int?,
+            entrance: String?,
+            doorphone: String?,
+            comment: String?
+    ){
+        val locatorAddress = "$street\n" +
+                "кв $flat, $entrance подъезд, $floor этаж. Домофон: $doorphone. $comment"
+        val loc = "Виленский переулок, 6\n" +
+                "кв 6, 6 подъезд, 6 этаж. Домофон: 6. 6"
+        locatorMap[AddressElements.VIEW_NEW_ADDRESS_ANDROID] = locatorAddress
+        locatorMap[AddressElements.VIEW_NEW_ADDRESS_IOS] = locatorAddress
+
+    }
+
     private enum class AddressElements {
         ADD_ADDRESS_BUTTON_ANDROID,
         ADD_ADDRESS_BUTTON_IOS,
@@ -264,10 +281,8 @@ class Address {
             AddressElements.ADD_ADDRESS_BUTTON_IOS to "Добавить новый адрес",
             AddressElements.ADD_ADDRESS_BUTTON_ELEMENT_NAME to "Кнопка добавления нового адреса",
 
-            AddressElements.VIEW_NEW_ADDRESS_ANDROID to "Виленский переулок, 6\n" +
-                    "кв 6, 6 подъезд, 6 этаж. Домофон: 6. 6",
-            AddressElements.VIEW_NEW_ADDRESS_IOS to "Виленский переулок, 6\n" +
-                    "кв 6, 6 подъезд, 6 этаж. Домофон: 6. 6",
+            AddressElements.VIEW_NEW_ADDRESS_ANDROID to "",
+            AddressElements.VIEW_NEW_ADDRESS_IOS to "",
             AddressElements.VIEW_NEW_ADDRESS_ELEMENT_NAME to "Элемент с новым адресом",
 
             AddressElements.INSERT_ADDRESS_ANDROID to "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View[5]/android.view.View/android.view.View/android.widget.EditText",

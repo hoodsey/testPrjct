@@ -3,8 +3,10 @@ package general_cases_for_tests
 import GlobalVariable.platformType
 import TestFunctions.tapByCoordinates
 import TypeOS
+import api_client.requests.categories.ProfileApi
 import org.openqa.selenium.Dimension
 import org.openqa.selenium.Point
+import screens.Address
 import screens.Cart
 import screens.MainPage
 import java.util.concurrent.TimeUnit
@@ -25,7 +27,14 @@ object DeliveryScenarios {
         }.onSuccess {
             mainPage.clickToAddress()
             TimeUnit.SECONDS.sleep(2)
-            FillingAddressScenarios.deleteAddress()
+            //запрос данных профиля
+            ProfileApi.get(mutableMapOf())
+            val address  = Address()
+            for (addressApi in ProfileApi.resBody.addresses) {
+                if (addressApi.street == "Виленский переулок, 6")
+                    address.insertAddressViewFromApi(addressApi.street, addressApi.flat, addressApi.floor, addressApi.entrance, addressApi.doorphone, addressApi.comment)
+            }
+            FillingAddressScenarios.deleteAddress(address)
             FillingAddressScenarios.useLocation()
             mainPage.clickRollUpElement()
         }

@@ -41,9 +41,8 @@ object FillingAddressScenarios {
     }
 
     //функция удаляет новый адрес
-    fun deleteAddress() {
+    fun deleteAddress(address: Address) {
         //свайп влево по элементу с адресом
-        val address = Address()
         address.swipeLeftViewNewAddress()
         //размеры элемента
         val addressViewSize: Dimension = address.findSizeViewNewAddress()

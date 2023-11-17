@@ -8,6 +8,7 @@ object Environment {
         environment = environment.copy(sessionId = newSessionId)
         headers["sessionid"] = newSessionId
     }
+
     fun updateAuthToken(newAuthToken: String) {
         environment = environment.copy(authToken = newAuthToken)
         headers["authToken"] = newAuthToken
@@ -15,7 +16,7 @@ object Environment {
 
     var environment = Env()
     val endPoints = EndPoints()
-    var headers: MutableMap<String,String> = mutableMapOf(
+    var headers: MutableMap<String, String> = mutableMapOf(
             "authority" to "api.starterapp.ru",
             "authorization" to environment.authToken,
             "sessionid" to environment.sessionId,
@@ -27,9 +28,10 @@ object Environment {
             "x-real-ip" to "91.197.192.54",
             "timezone" to "Europe/Moscow"
     )
+
     data class Env(
             var authToken: String = "",
-            var sessionId: String = "aa009956-0978-4b23-b662-7e43017c405f",
+            var sessionId: String = "c7d4979c-f779-412c-ae5a-0d69f43769f5",
             val host: String = "https://api.starterapp.ru/school/",
             val shopId: String = "8c65fc68-dfd9-4591-a8f2-9edf77fbd3fd"
 
@@ -37,11 +39,11 @@ object Environment {
 
     data class EndPoints(
             val categories: String = "categories/8c65fc68-dfd9-4591-a8f2-9edf77fbd3fd/v2",
-            val authCode: String  = "auth/resetCode",
-            val login: String  = "auth/login",
-            val sessionId: String  = "user/sessionId",
-            val profile: String ="user/v2",
-            val meals: String = "/meals/8c65fc68-dfd9-4591-a8f2-9edf77fbd3fd/v2"
+            val authCode: String = "auth/resetCode",
+            val login: String = "auth/login",
+            val sessionId: String = "user/sessionId",
+            val profile: String = "user/v2",
+            val meals: String = "meals/8c65fc68-dfd9-4591-a8f2-9edf77fbd3fd/v2"
 
 
     )

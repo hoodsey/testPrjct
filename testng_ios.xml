@@ -9,9 +9,9 @@
     <parameter name="paramPathToApp" value="/Users/admin/apps/Runner.app"/>
     <test verbose="2" preserve-order="true" name="IOS tests" parallel="none">
         <classes>
-            <class name="tests.ApiTest"/>
-           <!-- <class name="tests.DeleteAddressTest"/>
-            <class name="tests.DeliveryWithOutAuthTest"/> -->
+            <class name="tests.DeliveryWithOutAuthTest"/>
+            <!-- <class name="tests.DeleteAddressTest"/>
+             <class name="tests.DeliveryWithOutAuthTest"/> -->
         </classes>
     </test>
 </suite>

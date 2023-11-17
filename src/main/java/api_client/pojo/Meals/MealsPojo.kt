@@ -22,16 +22,54 @@ open class MealsPojo {
             @SerializedName("createdAt") var createdAt: String? = null,
             @SerializedName("updatedAt") var updatedAt: String? = null,
             @SerializedName("images") var images: ArrayList<String> = arrayListOf(),
-            @SerializedName("tags") var tags: ArrayList<String> = arrayListOf(),
+            @SerializedName("tags") var tags: ArrayList<Tags> = arrayListOf(),
             @SerializedName("deliveryRestrictions") var deliveryRestrictions: ArrayList<String> = arrayListOf(),
             @SerializedName("modifications") var modifications: ArrayList<Any> = arrayListOf(),
             @SerializedName("mainMeal") var mainMeal: Boolean? = null,
-            @SerializedName("modificationValues") var modificationValues: ArrayList<Any> = arrayListOf(),
-            @SerializedName("toppingGroups") var toppingGroups: ArrayList<Any> = arrayListOf(),
+            @SerializedName("modificationValues") var modificationValues: ArrayList<ModificationValues> = arrayListOf(),
+            @SerializedName("toppingGroups") var toppingGroups: ArrayList<ToppingGroups> = arrayListOf(),
             @SerializedName("priceBeforeDiscount") var priceBeforeDiscount: Int? = null,
             @SerializedName("media") var media: ArrayList<String> = arrayListOf(),
             @SerializedName("descriptionRich") var descriptionRich: ArrayList<String> = arrayListOf(),
             @SerializedName("previewImage") var previewImage: String? = null,
             @SerializedName("minPrice") var minPrice: Int? = null
     )
+
+    data class Tags(
+
+            @SerializedName("code") var code: String? = null,
+            @SerializedName("name") var name: String? = null
+
+    )
+
+    data class ModificationValues(
+
+            @SerializedName("type") var type: String? = null,
+            @SerializedName("name") var name: String? = null
+
+    )
+
+    data class Toppings(
+
+            @SerializedName("code") var code: String? = null,
+            @SerializedName("name") var name: String? = null,
+            @SerializedName("price") var price: Int? = null,
+            @SerializedName("maxAmount") var maxAmount: Int? = null,
+            @SerializedName("minAmount") var minAmount: Int? = null,
+            @SerializedName("required") var required: Boolean? = null,
+            @SerializedName("images") var images: ArrayList<String> = arrayListOf(),
+            @SerializedName("quantity") var quantity: Int? = null
+
+    )
+
+    data class ToppingGroups(
+
+            @SerializedName("maxAmount") var maxAmount: Int? = null,
+            @SerializedName("minAmount") var minAmount: Int? = null,
+            @SerializedName("required") var required: Boolean? = null,
+            @SerializedName("groupName") var groupName: String? = null,
+            @SerializedName("toppings") var toppings: ArrayList<Toppings> = arrayListOf()
+
+    )
+
 }

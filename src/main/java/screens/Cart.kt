@@ -47,11 +47,11 @@ class Cart {
 
     private val preOrderInfo = ScreenConstructor(
             androidAccessibilityId = "Заказ на сумму\n" +
-                    "195 ₽\n" +
+                    "444 ₽\n" +
                     "Доставка\n" +
                     "Бесплатно",
             iosAccessibilityId = "Заказ на сумму\n" +
-                    "195 ₽\n" +
+                    "444 ₽\n" +
                     "Доставка\n" +
                     "Бесплатно",
             elementName = "Элемент с информацией о заказе"

@@ -62,4 +62,5 @@ class Profile {
             iosAccessibilityId = "Мои адреса",
             elementName = "Кнопка выхода из профиля"
     )
+
 }
