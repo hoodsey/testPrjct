@@ -24,7 +24,7 @@ open class MealsPojo {
             @SerializedName("images") var images: ArrayList<String> = arrayListOf(),
             @SerializedName("tags") var tags: ArrayList<Tags> = arrayListOf(),
             @SerializedName("deliveryRestrictions") var deliveryRestrictions: ArrayList<String> = arrayListOf(),
-            @SerializedName("modifications") var modifications: ArrayList<Any> = arrayListOf(),
+            @SerializedName("modifications") var modifications: ArrayList<Modifications> = arrayListOf(),
             @SerializedName("mainMeal") var mainMeal: Boolean? = null,
             @SerializedName("modificationValues") var modificationValues: ArrayList<ModificationValues> = arrayListOf(),
             @SerializedName("toppingGroups") var toppingGroups: ArrayList<ToppingGroups> = arrayListOf(),
@@ -47,6 +47,13 @@ open class MealsPojo {
             @SerializedName("type") var type: String? = null,
             @SerializedName("name") var name: String? = null
 
+    )
+
+    data class Modifications(
+            @SerializedName("name") var name: String? = null,
+            @SerializedName("sortIndex") var sortIndex: Int? = null,
+            @SerializedName("mealCode") var mealCode: String? = null,
+            @SerializedName("mods") var mods: String? = null
     )
 
     data class Toppings(
