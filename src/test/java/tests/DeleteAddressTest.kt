@@ -70,7 +70,7 @@ class DeleteAddressTest : MainActivity() {
         TimeUnit.SECONDS.sleep(2)
         fillingAddress("Виленский переулок, 6, Санкт-Петербург", "6", "6", "6", "6", "6")
         // проверка наличия нового адреса и его удаление
-        TimeUnit.SECONDS.sleep(2)
+        TimeUnit.SECONDS.sleep(5)
         if (address.checkViewNewAddress()) {
             deleteAddress(address)
         }

@@ -220,7 +220,7 @@ class Address {
             entrance: String?,
             doorphone: String?,
             comment: String?
-    ){
+    ) {
         val locatorAddress = "$street\n" +
                 "кв $flat, $entrance подъезд, $floor этаж. Домофон: $doorphone. $comment"
         val loc = "Виленский переулок, 6\n" +

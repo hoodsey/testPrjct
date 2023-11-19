@@ -56,6 +56,7 @@ object AuthorizationScenarios {
         auth.clickToSendCodeButton()
         var codeAuth = "";
         //поиск элемента с кодом по атрибуту и обрезка кода
+        TimeUnit.SECONDS.sleep(4)
         when (platformType) {
             TypeOS.IOS -> {
                 codeAuth = auth.getAttributeCodeAuthElement("name").substringAfterLast("смс\n").substringBefore("\n+7")

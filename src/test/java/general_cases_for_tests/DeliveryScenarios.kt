@@ -29,7 +29,7 @@ object DeliveryScenarios {
             TimeUnit.SECONDS.sleep(2)
             //запрос данных профиля
             ProfileApi.get(mutableMapOf())
-            val address  = Address()
+            val address = Address()
             for (addressApi in ProfileApi.resBody.addresses) {
                 if (addressApi.street == "Виленский переулок, 6")
                     address.insertAddressViewFromApi(addressApi.street, addressApi.flat, addressApi.floor, addressApi.entrance, addressApi.doorphone, addressApi.comment)

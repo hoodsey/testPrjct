@@ -14,10 +14,11 @@ class Cart {
                 locatorTypeAndroid = LocatorType.ACCESSIBILITY_ID,
                 locatorIOS = preOrderInfo.iosAccessibilityId,
                 locatorTypeIOS = LocatorType.ACCESSIBILITY_ID,
-                elementName =  preOrderInfo.elementName,
+                elementName = preOrderInfo.elementName,
         )
 
     }
+
     fun findCoordinatePreOrderInfo(): Point {
         return findCoordinates(
                 locatorAndroid = preOrderInfo.androidAccessibilityId,
@@ -28,6 +29,7 @@ class Cart {
         )
 
     }
+
     public fun cleanCart() {
         clickToElement(
                 locatorAndroid = cleanCart.androidAccessibilityId,
