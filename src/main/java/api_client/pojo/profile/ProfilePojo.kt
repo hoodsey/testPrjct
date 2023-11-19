@@ -178,7 +178,7 @@ open class ProfilePojo {
             @SerializedName("toppings") var toppings: ArrayList<Toppings> = arrayListOf(),
             @SerializedName("product") var product: Product? = Product(),
             @SerializedName("isAccessible") var isAccessible: Boolean? = null,
-            @SerializedName("categoryNotAccessibility") var categoryNotAccessibility: String? = null,
+            @SerializedName("categoryNotAccessibility") var categoryNotAccessibility: ArrayList<String> = arrayListOf(),
             @SerializedName("notAccessibleByBrand") var notAccessibleByBrand: Boolean? = null,
             @SerializedName("notAccessibleByStopList") var notAccessibleByStopList: Boolean? = null
 
