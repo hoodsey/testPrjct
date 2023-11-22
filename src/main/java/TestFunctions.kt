@@ -264,7 +264,7 @@ object TestFunctions {
     }
 
     // найти координаты элемента
-    @Step("Найти координаты элемента '{'elementName}'")
+    @Step("Найти координаты элемента '{elementName}'")
     fun findCoordinates(
             locatorAndroid: String,
             locatorTypeAndroid: LocatorType,
