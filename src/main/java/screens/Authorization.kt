@@ -75,14 +75,14 @@ class Authorization {
 
             AuthorizationElements.SEND_CODE_BUTTON_ANDROID to "Получить код",
             AuthorizationElements.SEND_CODE_BUTTON_IOS to "Получить код",
-            AuthorizationElements.SEND_CODE_BUTTON_ELEMENT_NAME to "Кнопка для отправки кода атворизации",
+            AuthorizationElements.SEND_CODE_BUTTON_ELEMENT_NAME to "Кнопка для отправки кода авторизации",
 
             AuthorizationElements.GET_ATTRIBUTE_AUTH_ELEMENT_ANDROID to "//*[starts-with(@content-desc,'Введите код из смс')]",
             AuthorizationElements.GET_ATTRIBUTE_AUTH_ELEMENT_IOS to "//*[starts-with(@name,'Введите код из смс')]",
-            AuthorizationElements.GET_ATTRIBUTE_AUTH_ELEMENT_ELEMENT_NAME to "Элемент в окне авторизации c выводом кода авторизации",
+            AuthorizationElements.GET_ATTRIBUTE_AUTH_ELEMENT_ELEMENT_NAME to "Элемент c выводом кода авторизации",
 
             AuthorizationElements.CODE_INSERT_ANDROID to "android.widget.EditText",
             AuthorizationElements.CODE_INSERT_IOS to "//XCUIElementTypeTextField",
-            AuthorizationElements.CODE_INSERT_ELEMENT_NAME to "Элемент в окне авторизации для кода авторизации"
+            AuthorizationElements.CODE_INSERT_ELEMENT_NAME to "Поле для кода авторизации"
     )
 }

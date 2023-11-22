@@ -26,7 +26,7 @@ object TestFunctions {
     }
 
     // фнукция клика по элементу
-    @Step("Нажатие на {elementName}")
+    @Step("Нажатие на '{elementName}'")
     fun clickToElement(
             locatorAndroid: String,
             locatorTypeAndroid: LocatorType,
@@ -41,7 +41,7 @@ object TestFunctions {
     }
 
     // функция вствки текста
-    @Step("Ввод текста {text} в поле {elementName}")
+    @Step("Ввод текста '{text}' в поле '{elementName}'")
     fun sendText(
             locatorAndroid: String,
             locatorTypeAndroid: LocatorType,
@@ -61,7 +61,7 @@ object TestFunctions {
     }
 
     //функция отчитки поля
-    @Step("Отчистка элемента {elementName}")
+    @Step("Отчистка элемента '{elementName}'")
     fun clearField(
             locatorAndroid: String,
             locatorTypeAndroid: LocatorType,
@@ -76,7 +76,7 @@ object TestFunctions {
     }
 
     // функция поиска атрибута
-    @Step("Поиск атрибута {attribute} у элемента {elementName}")
+    @Step("Поиск атрибута '{attribute}' у элемента '{elementName}'")
     fun getAttribute(
             locatorAndroid: String,
             locatorTypeAndroid: LocatorType,
@@ -90,7 +90,7 @@ object TestFunctions {
     }
 
     //функция проверки наличия элемента
-    @Step("Проверка наличия элемента {elementName}")
+    @Step("Проверка наличия элемента '{elementName}'")
     fun checkAvailableElement(
             locatorAndroid: String,
             locatorTypeAndroid: LocatorType,
@@ -211,7 +211,7 @@ object TestFunctions {
     }
 
     // свайп по элемнту влево
-    @Step("свайп влево по элементу {elementName}")
+    @Step("свайп влево по элементу '{elementName}'")
     fun swipeScreenLeft(
             locatorAndroid: String,
             locatorTypeAndroid: LocatorType,
@@ -233,7 +233,7 @@ object TestFunctions {
     }
 
     // свайп по элемнту вниз
-    @Step("свайп вниз по элементу {elementName}")
+    @Step("свайп вниз по элементу '{elementName}'")
     fun swipeElementDown(
             locatorAndroid: String,
             locatorTypeAndroid: LocatorType,
@@ -255,7 +255,7 @@ object TestFunctions {
     }
 
     // тап по элементу
-    @Step("Тап по элементу {elementName}")
+    @Step("Тап по элементу '{elementName}'")
     fun tapByElement(locator: String, locatorType: LocatorType) {
         val element = findElement(locator, locatorType)
         val size = element.size
@@ -264,7 +264,7 @@ object TestFunctions {
     }
 
     // найти координаты элемента
-    @Step("Найти координаты элемента {elementName}")
+    @Step("Найти координаты элемента '{'elementName}'")
     fun findCoordinates(
             locatorAndroid: String,
             locatorTypeAndroid: LocatorType,
@@ -289,7 +289,7 @@ object TestFunctions {
     }
 
     // найти размеры элемента
-    @Step("Найти размеры элемента {elementName}")
+    @Step("Найти размеры элемента '{elementName}'")
     fun findSizeElement(locatorAndroid: String,
                         locatorTypeAndroid: LocatorType,
                         locatorIOS: String,
