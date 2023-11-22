@@ -71,11 +71,11 @@ class Authorization {
             AuthorizationElements.SELECT_PHONE_ANDROID to "//android.view.View[@content-desc=\"Укажите телефон\n" +
                     "На него отправим код подтверждения\"]/android.widget.EditText",
             AuthorizationElements.SELECT_PHONE_IOS to "//XCUIElementTypeTextField",
-            AuthorizationElements.SELECT_PHONE_ELEMENT_NAME to "Элемент в окне авторизации для ввода телефона",
+            AuthorizationElements.SELECT_PHONE_ELEMENT_NAME to "Поле для ввода телефона",
 
             AuthorizationElements.SEND_CODE_BUTTON_ANDROID to "Получить код",
             AuthorizationElements.SEND_CODE_BUTTON_IOS to "Получить код",
-            AuthorizationElements.SEND_CODE_BUTTON_ELEMENT_NAME to "Кнопка  для отправки кода атворизации",
+            AuthorizationElements.SEND_CODE_BUTTON_ELEMENT_NAME to "Кнопка для отправки кода атворизации",
 
             AuthorizationElements.GET_ATTRIBUTE_AUTH_ELEMENT_ANDROID to "//*[starts-with(@content-desc,'Введите код из смс')]",
             AuthorizationElements.GET_ATTRIBUTE_AUTH_ELEMENT_IOS to "//*[starts-with(@name,'Введите код из смс')]",

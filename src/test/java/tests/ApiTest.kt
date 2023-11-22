@@ -11,11 +11,13 @@ import api_client.requests.categories.ProfileApi
 import api_client.requests.categories.User
 import api_client.specifications.Specifications.installSpecification
 import api_client.specifications.Specifications.requestSpec
+import io.qameta.allure.Description
 import org.testng.annotations.Test
 
 class ApiTest {
 
-    @Test
+    @Description("Тест работы с API")
+    @Test(description = "Тест работы с API")
     fun apiTest() {
 
         installSpecification(requestSpec(environment.host))

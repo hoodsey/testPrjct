@@ -16,16 +16,16 @@ object DeliveryScenarios {
     fun checkShoppingCart(mainPage: MainPage, cart: Cart) {
         // если есть товары в корзине, то корзина отчищается
         runCatching {
-            mainPage.checkAvailableCartButton()
+            mainPage.checkAvailableCartButton(findElementWithOutCatching = true)
         }.onSuccess {
-            mainPage.goOverCart()
-            cart.cleanCart()
+            mainPage.goOverCart(findElementWithOutCatching = true)
+            cart.cleanCart(findElementWithOutCatching = true)
         }
         // если задан адрес, то адрес удаляется
         runCatching {
-            mainPage.checkViewAddress()
+            mainPage.checkViewAddress(findElementWithOutCatching = true)
         }.onSuccess {
-            mainPage.clickToAddress()
+            mainPage.clickToAddress(findElementWithOutCatching = true)
             TimeUnit.SECONDS.sleep(2)
             //запрос данных профиля
             ProfileApi.get(mutableMapOf())
@@ -36,7 +36,7 @@ object DeliveryScenarios {
             }
             FillingAddressScenarios.deleteAddress(address)
             FillingAddressScenarios.useLocation()
-            mainPage.clickRollUpElement()
+            mainPage.clickRollUpElement(findElementWithOutCatching = true)
         }
     }
 

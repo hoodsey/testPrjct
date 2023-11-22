@@ -6,23 +6,25 @@ import TestFunctions.clickToElement
 
 class MainPage {
 
-    public fun clickSystemAboutMonitoring() {
+    public fun clickSystemAboutMonitoring(findElementWithOutCatching: Boolean = false) {
         clickToElement(
                 locatorAndroid = locatorMap[MaimPageElements.SYSTEM_ABOUT_MONITORING_ANDROID].toString(),
                 locatorTypeAndroid = LocatorType.XPATH,
                 locatorIOS = locatorMap[MaimPageElements.SYSTEM_ABOUT_MONITORING_IOS].toString(),
                 locatorTypeIOS = LocatorType.IOS_CLASS_CHAIN,
                 elementName = locatorMap[MaimPageElements.SYSTEM_ABOUT_MONITORING_ELEMENT_NAME].toString(),
+                findElementWithOutCatching = findElementWithOutCatching
         )
     }
 
-    public fun clickRollUpElement() {
+    public fun clickRollUpElement(findElementWithOutCatching: Boolean = false) {
         clickToElement(
                 locatorAndroid = locatorMap[MaimPageElements.ROLL_UP_ELEMENT_ANDROID].toString(),
                 locatorTypeAndroid = LocatorType.ACCESSIBILITY_ID,
                 locatorIOS = locatorMap[MaimPageElements.ROLL_UP_ELEMENT_IOS].toString(),
                 locatorTypeIOS = LocatorType.ACCESSIBILITY_ID,
                 elementName = locatorMap[MaimPageElements.ROLL_UP_ELEMENT_ELEMENT_NAME].toString(),
+                findElementWithOutCatching = findElementWithOutCatching
         )
     }
 
@@ -46,43 +48,47 @@ class MainPage {
         )
     }
 
-    public fun goOverCart() {
+    public fun goOverCart(findElementWithOutCatching: Boolean = false) {
         clickToElement(
                 locatorAndroid = locatorMap[MaimPageElements.GO_OVER_CART_ANDROID].toString(),
                 locatorTypeAndroid = LocatorType.XPATH,
                 locatorIOS = locatorMap[MaimPageElements.GO_OVER_CART_IOS].toString(),
                 locatorTypeIOS = LocatorType.ACCESSIBILITY_ID,
                 elementName = locatorMap[MaimPageElements.GO_OVER_CART_ELEMENT_NAME].toString(),
+                findElementWithOutCatching = findElementWithOutCatching
         )
     }
 
-    public fun checkAvailableCartButton(): Boolean {
+    public fun checkAvailableCartButton(findElementWithOutCatching: Boolean = false): Boolean {
         return checkAvailableElement(
                 locatorAndroid = locatorMap[MaimPageElements.GO_OVER_CART_ANDROID].toString(),
                 locatorTypeAndroid = LocatorType.XPATH,
                 locatorIOS = locatorMap[MaimPageElements.GO_OVER_CART_IOS].toString(),
                 locatorTypeIOS = LocatorType.ACCESSIBILITY_ID,
                 elementName = locatorMap[MaimPageElements.GO_OVER_CART_ELEMENT_NAME].toString(),
+                findElementWithOutCatching = findElementWithOutCatching
         )
     }
 
-    public fun checkViewAddress(): Boolean {
+    public fun checkViewAddress(findElementWithOutCatching: Boolean = false): Boolean {
         return checkAvailableElement(
                 locatorAndroid = locatorMap[MaimPageElements.VIEW_ADDRESS_ANDROID].toString(),
                 locatorTypeAndroid = LocatorType.ACCESSIBILITY_ID,
                 locatorIOS = locatorMap[MaimPageElements.VIEW_ADDRESS_IOS].toString(),
                 locatorTypeIOS = LocatorType.ACCESSIBILITY_ID,
                 elementName = locatorMap[MaimPageElements.VIEW_ADDRESS_ELEMENT_NAME].toString(),
+                findElementWithOutCatching = findElementWithOutCatching
         )
     }
 
-    public fun clickToAddress() {
+    public fun clickToAddress(findElementWithOutCatching: Boolean = false) {
         clickToElement(
                 locatorAndroid = locatorMap[MaimPageElements.VIEW_ADDRESS_ANDROID].toString(),
                 locatorTypeAndroid = LocatorType.ACCESSIBILITY_ID,
                 locatorIOS = locatorMap[MaimPageElements.VIEW_ADDRESS_IOS].toString(),
                 locatorTypeIOS = LocatorType.ACCESSIBILITY_ID,
                 elementName = locatorMap[MaimPageElements.VIEW_ADDRESS_ELEMENT_NAME].toString(),
+                findElementWithOutCatching = findElementWithOutCatching
         )
     }
 

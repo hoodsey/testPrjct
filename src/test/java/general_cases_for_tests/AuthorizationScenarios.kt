@@ -19,7 +19,7 @@ object AuthorizationScenarios {
         var userIsAuthorization: Boolean
         // проверка наличия кноки выход
         try {
-            userIsAuthorization = profile.checkQuitButton()
+            userIsAuthorization = profile.checkQuitButton(findElementWithOutCatching = true)
         } catch (e: org.openqa.selenium.NoSuchElementException) {
             userIsAuthorization = false
         }
@@ -63,8 +63,7 @@ object AuthorizationScenarios {
             }
 
             TypeOS.ANDROID -> {
-                codeAuth = auth.getAttributeCodeAuthElement("content-desc").substringAfterLast("смс\n")
-                codeAuth.substringBefore("\n+7")
+                codeAuth = auth.getAttributeCodeAuthElement("content-desc").substringBefore("\n+7").substringAfterLast("смс\n")
             }
         }
         // вставка кода

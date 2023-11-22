@@ -30,13 +30,14 @@ class Cart {
 
     }
 
-    public fun cleanCart() {
+    public fun cleanCart(findElementWithOutCatching: Boolean = false) {
         clickToElement(
                 locatorAndroid = cleanCart.androidAccessibilityId,
                 locatorTypeAndroid = LocatorType.ACCESSIBILITY_ID,
                 locatorIOS = cleanCart.iosAccessibilityId,
                 locatorTypeIOS = LocatorType.ACCESSIBILITY_ID,
                 elementName = cleanCart.elementName,
+                findElementWithOutCatching = findElementWithOutCatching
         )
         clickToElement(
                 locatorAndroid = approvalCleanCart.androidAccessibilityId,
@@ -44,6 +45,7 @@ class Cart {
                 locatorIOS = approvalCleanCart.iosAccessibilityId,
                 locatorTypeIOS = LocatorType.ACCESSIBILITY_ID,
                 elementName = approvalCleanCart.elementName,
+                findElementWithOutCatching = findElementWithOutCatching
         )
     }
 

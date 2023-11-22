@@ -32,7 +32,7 @@ object FillingAddressScenarios {
     fun useLocation() {
         val location = Location()
         try {
-            location.clickToUsingLocation()
+            location.clickToUsingLocation(findElementWithOutCatching = true)
         } catch (e: org.openqa.selenium.NoSuchElementException) {
             e.printStackTrace() //Распечатываем ошибку в консоль
             println("Мы поймали ошибку, и теперь тест не упадет")
@@ -43,10 +43,10 @@ object FillingAddressScenarios {
     //функция удаляет новый адрес
     fun deleteAddress(address: Address) {
         //свайп влево по элементу с адресом
-        address.swipeLeftViewNewAddress()
+        address.swipeLeftViewNewAddress(findElementWithOutCatching = true)
         //размеры элемента
-        val addressViewSize: Dimension = address.findSizeViewNewAddress()
-        val addressViewCoordinate: Point = address.findCoordinateViewNewAddress()
+        val addressViewSize: Dimension = address.findSizeViewNewAddress(findElementWithOutCatching = true)
+        val addressViewCoordinate: Point = address.findCoordinateViewNewAddress(findElementWithOutCatching = true)
         // размер экрана устройства
         val widthScreens = findWidthScreen()
         //расчет координат кнопки "Удалить"
@@ -56,5 +56,6 @@ object FillingAddressScenarios {
         deleteButtonY = addressViewCoordinate.y + addressViewSize.height / 2
         // нажать по вычесленным координатам
         tapByCoordinates(deleteButtonX, deleteButtonY)
+        TimeUnit.SECONDS.sleep(2)
     }
 }

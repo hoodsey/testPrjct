@@ -24,43 +24,47 @@ class Address {
         )
     }
 
-    fun checkViewNewAddress(): Boolean {
+    fun checkViewNewAddress(findElementWithOutCatching: Boolean = false): Boolean {
         return checkAvailableElement(
                 locatorAndroid = locatorMap[AddressElements.VIEW_NEW_ADDRESS_ANDROID].toString(),
                 locatorTypeAndroid = LocatorType.ACCESSIBILITY_ID,
                 locatorIOS = locatorMap[AddressElements.VIEW_NEW_ADDRESS_IOS].toString(),
                 locatorTypeIOS = LocatorType.ACCESSIBILITY_ID,
                 elementName = locatorMap[AddressElements.VIEW_NEW_ADDRESS_ELEMENT_NAME].toString(),
+                findElementWithOutCatching = findElementWithOutCatching
         )
     }
 
-    fun swipeLeftViewNewAddress() {
+    fun swipeLeftViewNewAddress(findElementWithOutCatching: Boolean = false) {
         swipeScreenLeft(
                 locatorAndroid = locatorMap[AddressElements.VIEW_NEW_ADDRESS_ANDROID].toString(),
                 locatorTypeAndroid = LocatorType.ACCESSIBILITY_ID,
                 locatorIOS = locatorMap[AddressElements.VIEW_NEW_ADDRESS_IOS].toString(),
                 locatorTypeIOS = LocatorType.ACCESSIBILITY_ID,
                 elementName = locatorMap[AddressElements.VIEW_NEW_ADDRESS_ELEMENT_NAME].toString(),
+                findElementWithOutCatching = findElementWithOutCatching
         )
     }
 
-    fun findSizeViewNewAddress(): Dimension {
+    fun findSizeViewNewAddress(findElementWithOutCatching: Boolean = false): Dimension {
         return findSizeElement(
                 locatorAndroid = locatorMap[AddressElements.VIEW_NEW_ADDRESS_ANDROID].toString(),
                 locatorTypeAndroid = LocatorType.ACCESSIBILITY_ID,
                 locatorIOS = locatorMap[AddressElements.VIEW_NEW_ADDRESS_IOS].toString(),
                 locatorTypeIOS = LocatorType.ACCESSIBILITY_ID,
                 elementName = locatorMap[AddressElements.VIEW_NEW_ADDRESS_ELEMENT_NAME].toString(),
+                findElementWithOutCatching = findElementWithOutCatching
         )
     }
 
-    fun findCoordinateViewNewAddress(): Point {
+    fun findCoordinateViewNewAddress(findElementWithOutCatching: Boolean = false): Point {
         return findCoordinates(
                 locatorAndroid = locatorMap[AddressElements.VIEW_NEW_ADDRESS_ANDROID].toString(),
                 locatorTypeAndroid = LocatorType.ACCESSIBILITY_ID,
                 locatorIOS = locatorMap[AddressElements.VIEW_NEW_ADDRESS_IOS].toString(),
                 locatorTypeIOS = LocatorType.ACCESSIBILITY_ID,
                 elementName = locatorMap[AddressElements.VIEW_NEW_ADDRESS_ELEMENT_NAME].toString(),
+                findElementWithOutCatching = findElementWithOutCatching
         )
 
     }
@@ -203,13 +207,14 @@ class Address {
         )
     }
 
-    fun swipeDownMyAddress() {
+    fun swipeDownMyAddress(findElementWithOutCatching: Boolean = false) {
         swipeElementDown(
                 locatorAndroid = locatorMap[AddressElements.MY_ADDRESSES_ANDROID].toString(),
                 locatorTypeAndroid = LocatorType.XPATH,
                 locatorIOS = locatorMap[AddressElements.MY_ADDRESSES_IOS].toString(),
                 locatorTypeIOS = LocatorType.IOS_CLASS_CHAIN,
                 elementName = locatorMap[AddressElements.MY_ADDRESSES_ELEMENT_NAME].toString(),
+                findElementWithOutCatching = findElementWithOutCatching
         )
     }
 
@@ -223,8 +228,6 @@ class Address {
     ) {
         val locatorAddress = "$street\n" +
                 "кв $flat, $entrance подъезд, $floor этаж. Домофон: $doorphone. $comment"
-        val loc = "Виленский переулок, 6\n" +
-                "кв 6, 6 подъезд, 6 этаж. Домофон: 6. 6"
         locatorMap[AddressElements.VIEW_NEW_ADDRESS_ANDROID] = locatorAddress
         locatorMap[AddressElements.VIEW_NEW_ADDRESS_IOS] = locatorAddress
 
@@ -311,7 +314,7 @@ class Address {
 
             AddressElements.INSERT_COMMENT_ANDROID to "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View[5]/android.view.View/android.view.View/android.view.View[2]/android.widget.EditText[5]",
             AddressElements.INSERT_COMMENT_IOS to "Комментарий для курьера",
-            AddressElements.INSERT_COMMENT_ELEMENT_NAME to "Поле ввода коментария к адресу",
+            AddressElements.INSERT_COMMENT_ELEMENT_NAME to "Поле ввода комментария к адресу",
 
             AddressElements.SAVE_NEW_ADDRESS_ANDROID to "Сохранить",
             AddressElements.SAVE_NEW_ADDRESS_IOS to "Сохранить",

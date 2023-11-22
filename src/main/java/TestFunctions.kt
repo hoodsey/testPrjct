@@ -2,13 +2,14 @@ import GlobalVariable.androidDriver
 import GlobalVariable.iosDriver
 import GlobalVariable.platformType
 import io.appium.java_client.AppiumBy
-import org.openqa.selenium.Dimension
-import org.openqa.selenium.Point
-import org.openqa.selenium.WebElement
+import io.qameta.allure.Attachment
+import io.qameta.allure.Step
+import org.openqa.selenium.*
 import org.openqa.selenium.interactions.Pause
 import org.openqa.selenium.interactions.PointerInput
 import org.openqa.selenium.interactions.Sequence
 import java.time.Duration.ofMillis
+import java.util.*
 
 object TestFunctions {
 
@@ -25,34 +26,32 @@ object TestFunctions {
     }
 
     // фнукция клика по элементу
+    @Step("Нажатие на {elementName}")
     fun clickToElement(
             locatorAndroid: String,
             locatorTypeAndroid: LocatorType,
             locatorIOS: String,
             locatorTypeIOS: LocatorType,
-            elementName: String
+            elementName: String,
+            findElementWithOutCatching: Boolean = false
     ) {
         val findProperty = checkTypeOS(locatorAndroid, locatorTypeAndroid, locatorIOS, locatorTypeIOS)
-        val element = findElement(findProperty.first, findProperty.second)
+        val element = findElement(findProperty.first, findProperty.second, findElementWithOutCatching)
         element.click()
     }
 
-    /*   fun clickToElementForIndex(locator: String = "", locatorType: LocatorType, index: Int) {
-           val elements: List<WebElement> = findElementsList(locator, locatorType)
-           if (index < elements.size) {
-               elements[index].click()
-           }
-       }*/
     // функция вствки текста
+    @Step("Ввод текста {text} в поле {elementName}")
     fun sendText(
             locatorAndroid: String,
             locatorTypeAndroid: LocatorType,
             locatorIOS: String,
             locatorTypeIOS: LocatorType,
             text: String,
-            elementName: String) {
+            elementName: String,
+            findElementWithOutCatching: Boolean = false) {
         val findProperty = checkTypeOS(locatorAndroid, locatorTypeAndroid, locatorIOS, locatorTypeIOS)
-        val element = findElement(findProperty.first, findProperty.second)
+        val element = findElement(findProperty.first, findProperty.second, findElementWithOutCatching)
         if (findProperty.second == locatorTypeIOS) {
             for (char in text.toCharArray()) {
                 element.sendKeys(char.toString())
@@ -62,19 +61,22 @@ object TestFunctions {
     }
 
     //функция отчитки поля
+    @Step("Отчистка элемента {elementName}")
     fun clearField(
             locatorAndroid: String,
             locatorTypeAndroid: LocatorType,
             locatorIOS: String,
             locatorTypeIOS: LocatorType,
             elementName: String,
+            findElementWithOutCatching: Boolean = false
     ) {
         val findProperty = checkTypeOS(locatorAndroid, locatorTypeAndroid, locatorIOS, locatorTypeIOS)
-        val element = findElement(findProperty.first, findProperty.second)
+        val element = findElement(findProperty.first, findProperty.second, findElementWithOutCatching)
         element.clear()
     }
 
     // функция поиска атрибута
+    @Step("Поиск атрибута {attribute} у элемента {elementName}")
     fun getAttribute(
             locatorAndroid: String,
             locatorTypeAndroid: LocatorType,
@@ -88,19 +90,22 @@ object TestFunctions {
     }
 
     //функция проверки наличия элемента
+    @Step("Проверка наличия элемента {elementName}")
     fun checkAvailableElement(
             locatorAndroid: String,
             locatorTypeAndroid: LocatorType,
             locatorIOS: String,
             locatorTypeIOS: LocatorType,
-            elementName: String
+            elementName: String,
+            findElementWithOutCatching: Boolean = false
     ): Boolean {
         val findProperty = checkTypeOS(locatorAndroid, locatorTypeAndroid, locatorIOS, locatorTypeIOS)
-        val element = findElement(findProperty.first, findProperty.second)
+        val element = findElement(findProperty.first, findProperty.second, findElementWithOutCatching)
         return element.isEnabled
     }
 
     //Тап по координатам на экране
+    @Step("Тап по координатам х:{cordX} у:{cordY} на экране")
     fun tapByCoordinates(cordX: Int, cordY: Int) {
         val finger = PointerInput(PointerInput.Kind.TOUCH, "finger")
         val actions = Sequence(finger, 1)
@@ -115,6 +120,7 @@ object TestFunctions {
     }
 
     //Позволяет сделать свайп по экрану. Нужно ввести координаты начала и окончания свайпа.
+    @Step("свайп по экрану с х:{startCordX} у:{startCordY} до х:{moveCordX} у:{moveCordY} ")
     fun swipeOnScreen(startCordX: Int, startCordY: Int, moveCordX: Int, moveCordY: Int) {
         val finger = PointerInput(PointerInput.Kind.TOUCH, "finger")
         val actions = Sequence(finger, 1)
@@ -131,49 +137,91 @@ object TestFunctions {
     }
 
     // поиск элемента на странице
-    private fun findElement(locator: String, locatorType: LocatorType): WebElement {
-        return when (locatorType) {
-            LocatorType.ID ->
-                if (platformType == TypeOS.ANDROID) {
-                    androidDriver.findElement(AppiumBy.id(locator))
-                } else iosDriver.findElement(AppiumBy.id(locator))
+    private fun findElement(
+            locator: String,
+            locatorType: LocatorType,
+            findElementWithOutCatching: Boolean = false
+    ): WebElement {
+        lateinit var element: WebElement
+        if (findElementWithOutCatching) {
+            when (locatorType) {
+                LocatorType.ID -> {
+                    element = if (platformType == TypeOS.ANDROID) {
+                        androidDriver.findElement(AppiumBy.id(locator))
+                    } else iosDriver.findElement(AppiumBy.id(locator))
+                }
 
-            LocatorType.XPATH ->
-                if (platformType == TypeOS.ANDROID) {
-                    androidDriver.findElement(AppiumBy.xpath(locator))
-                } else iosDriver.findElement(AppiumBy.xpath(locator))
+                LocatorType.XPATH -> {
+                    element = if (platformType == TypeOS.ANDROID) {
+                        androidDriver.findElement(AppiumBy.xpath(locator))
+                    } else iosDriver.findElement(AppiumBy.xpath(locator))
+                }
 
-            LocatorType.ACCESSIBILITY_ID ->
-                if (platformType == TypeOS.ANDROID) {
-                    androidDriver.findElement(AppiumBy.accessibilityId(locator))
-                } else iosDriver.findElement(AppiumBy.accessibilityId(locator))
+                LocatorType.ACCESSIBILITY_ID -> {
+                    element = if (platformType == TypeOS.ANDROID) {
+                        androidDriver.findElement(AppiumBy.accessibilityId(locator))
+                    } else iosDriver.findElement(AppiumBy.accessibilityId(locator))
+                }
 
-            LocatorType.CLASS_NAME -> androidDriver.findElement(AppiumBy.className(locator))
+                LocatorType.CLASS_NAME -> element = androidDriver.findElement(AppiumBy.className(locator))
 
-            LocatorType.IOS_CLASS_CHAIN -> iosDriver.findElement(AppiumBy.iOSClassChain(locator))
-            LocatorType.IOS_PREDICATE_STRING -> iosDriver.findElement(AppiumBy.iOSNsPredicateString(locator))
+                LocatorType.IOS_CLASS_CHAIN -> element = iosDriver.findElement(AppiumBy.iOSClassChain(locator))
+                LocatorType.IOS_PREDICATE_STRING -> element =
+                        iosDriver.findElement(AppiumBy.iOSNsPredicateString(locator))
 
+                else -> {}
+            }
+        } else {
+            runCatching {
+                when (locatorType) {
+                    LocatorType.ID -> {
+                        element = if (platformType == TypeOS.ANDROID) {
+                            androidDriver.findElement(AppiumBy.id(locator))
+                        } else iosDriver.findElement(AppiumBy.id(locator))
+                    }
+
+                    LocatorType.XPATH -> {
+                        element = if (platformType == TypeOS.ANDROID) {
+                            androidDriver.findElement(AppiumBy.xpath(locator))
+                        } else iosDriver.findElement(AppiumBy.xpath(locator))
+                    }
+
+                    LocatorType.ACCESSIBILITY_ID -> {
+                        element = if (platformType == TypeOS.ANDROID) {
+                            androidDriver.findElement(AppiumBy.accessibilityId(locator))
+                        } else iosDriver.findElement(AppiumBy.accessibilityId(locator))
+                    }
+
+                    LocatorType.CLASS_NAME -> element = androidDriver.findElement(AppiumBy.className(locator))
+                    LocatorType.IOS_CLASS_CHAIN -> element = iosDriver.findElement(AppiumBy.iOSClassChain(locator))
+                    LocatorType.IOS_PREDICATE_STRING -> element =
+                            iosDriver.findElement(AppiumBy.iOSNsPredicateString(locator))
+
+                    else -> {}
+
+                }
+            }.onSuccess {
+
+            }.onFailure {
+                makeScreenshotOfScreen(Date().toString())
+                org.testng.Assert.fail("Элемент не был найден по локатору - $locator")
+            }
         }
+        return element
     }
 
-    /*  private fun findElementsList(locator: String, locatorType: LocatorType):  List<WebElement> {
-          return when (locatorType) {
-              LocatorType.ID -> androidDriver.findElements(AppiumBy.id(locator))
-              LocatorType.XPATH -> androidDriver.findElements(AppiumBy.xpath(locator))
-              LocatorType.ACCESSIBILITY_ID -> androidDriver.findElements(AppiumBy.accessibilityId(locator))
-              LocatorType.CLASS_NAME -> androidDriver.findElements(AppiumBy.className(locator))
-          }
-      }*/
     // свайп по элемнту влево
+    @Step("свайп влево по элементу {elementName}")
     fun swipeScreenLeft(
             locatorAndroid: String,
             locatorTypeAndroid: LocatorType,
             locatorIOS: String,
             locatorTypeIOS: LocatorType,
             elementName: String,
+            findElementWithOutCatching: Boolean = false
     ) {
         val findProperty = checkTypeOS(locatorAndroid, locatorTypeAndroid, locatorIOS, locatorTypeIOS)
-        val element = findElement(findProperty.first, findProperty.second)
+        val element = findElement(findProperty.first, findProperty.second, findElementWithOutCatching)
         val size = element.size
         val location = element.location
         // Вычисление начальных и конечных координат свайпа
@@ -185,15 +233,17 @@ object TestFunctions {
     }
 
     // свайп по элемнту вниз
+    @Step("свайп вниз по элементу {elementName}")
     fun swipeElementDown(
             locatorAndroid: String,
             locatorTypeAndroid: LocatorType,
             locatorIOS: String,
             locatorTypeIOS: LocatorType,
             elementName: String,
+            findElementWithOutCatching: Boolean = false
     ) {
         val findProperty = checkTypeOS(locatorAndroid, locatorTypeAndroid, locatorIOS, locatorTypeIOS)
-        val element = findElement(findProperty.first, findProperty.second)
+        val element = findElement(findProperty.first, findProperty.second, findElementWithOutCatching)
         val size = element.size
         val location = element.location
         // Вычисление начальных и конечных координат свайпа
@@ -205,6 +255,7 @@ object TestFunctions {
     }
 
     // тап по элементу
+    @Step("Тап по элементу {elementName}")
     fun tapByElement(locator: String, locatorType: LocatorType) {
         val element = findElement(locator, locatorType)
         val size = element.size
@@ -213,19 +264,22 @@ object TestFunctions {
     }
 
     // найти координаты элемента
+    @Step("Найти координаты элемента {elementName}")
     fun findCoordinates(
             locatorAndroid: String,
             locatorTypeAndroid: LocatorType,
             locatorIOS: String,
             locatorTypeIOS: LocatorType,
             elementName: String,
+            findElementWithOutCatching: Boolean = false
     ): Point {
         val findProperty = checkTypeOS(locatorAndroid, locatorTypeAndroid, locatorIOS, locatorTypeIOS)
-        val element = findElement(findProperty.first, findProperty.second)
+        val element = findElement(findProperty.first, findProperty.second, findElementWithOutCatching)
         return element.location
     }
 
     // найти ширину экрана
+    @Step("Найти ширину экрана")
     fun findWidthScreen(): Int {
         if (platformType == TypeOS.ANDROID) {
             return androidDriver.manage().window().size.getWidth()
@@ -235,14 +289,25 @@ object TestFunctions {
     }
 
     // найти размеры элемента
+    @Step("Найти размеры элемента {elementName}")
     fun findSizeElement(locatorAndroid: String,
                         locatorTypeAndroid: LocatorType,
                         locatorIOS: String,
                         locatorTypeIOS: LocatorType,
-                        elementName: String): Dimension {
+                        elementName: String,
+                        findElementWithOutCatching: Boolean = false
+    ): Dimension {
         val findProperty = checkTypeOS(locatorAndroid, locatorTypeAndroid, locatorIOS, locatorTypeIOS)
-        val element = findElement(findProperty.first, findProperty.second)
+        val element = findElement(findProperty.first, findProperty.second, findElementWithOutCatching)
         return element.size
+    }
+
+    @Attachment(value = "Screenshot - {dateOnSystem}", type = "image/png")
+    fun makeScreenshotOfScreen(dateOnSystem: String?): ByteArray {
+        return if (platformType == TypeOS.IOS) {
+            (iosDriver as TakesScreenshot?)!!.getScreenshotAs(OutputType.BYTES)
+        } else (androidDriver as TakesScreenshot?)!!.getScreenshotAs(OutputType.BYTES)
+
     }
 
 }

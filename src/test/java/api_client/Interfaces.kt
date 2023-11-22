@@ -3,10 +3,11 @@ package api_client
 import ResponseType
 import api_client.environment.Environment.headers
 import com.google.gson.Gson
+import io.qameta.allure.Attachment
 import io.restassured.RestAssured.given
 import io.restassured.response.Response
 
-interface Post : Res {
+interface Post : Res, Allure {
     val resBody: Any
 
     fun post(resBody: Any)
@@ -27,7 +28,8 @@ interface Post : Res {
 
         if (responseType == ResponseType.JSON) {
             super.getDataFromJSON(response)
-        }
+            super.attachResBody(response.body.asString())
+        } else super.attachStatusCode((response.statusCode))
 
 
         return response
@@ -74,4 +76,19 @@ interface Res {
         return gson.fromJson(jsonString, Any::class.java)
     }
 
+}
+
+interface Allure {
+    // Преобразование ответа из class в json и приложение его к отчету
+    @Attachment(value = "Response", type = "application/json")
+    fun attachResBody(res: Any): String? {
+        val gson = Gson()
+        return gson.toJson(res)
+    }
+
+    // Приложение кода ответа к отчету
+    @Attachment(value = "Status Code", type = "application/json")
+    fun attachStatusCode(status: Int): Int {
+        return status
+    }
 }

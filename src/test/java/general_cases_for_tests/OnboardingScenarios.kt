@@ -14,14 +14,14 @@ object OnboardingScenarios {
         // обработка ошибки запуска приложения не с нуля
         try {
             // выбрать русский язык и перейти дальше
-            onboarding.clickRusButton()
-            onboarding.clickNextButton()
+            onboarding.clickRusButton(findElementWithOutCatching = true)
+            onboarding.clickNextButton(findElementWithOutCatching = true)
             // условие для обработки системных окон на IOS
             when (platformType) {
                 TypeOS.IOS -> {
-                    onboarding.notificationScipButton()
+                    onboarding.notificationScipButton(findElementWithOutCatching = true)
                     try {
-                        mainPage.clickSystemAboutMonitoring()
+                        mainPage.clickSystemAboutMonitoring(findElementWithOutCatching = true)
                     } catch (e: org.openqa.selenium.NoSuchElementException) {
                         e.printStackTrace() //Распечатываем ошибку в консоль
                         println("Мы поймали ошибку, и теперь тест не упадет")
@@ -31,7 +31,7 @@ object OnboardingScenarios {
                 else -> {}
             }
             //закрыть окно с выбором типа заказа
-            mainPage.clickRollUpElement()
+            mainPage.clickRollUpElement(findElementWithOutCatching = true)
         } catch (e: org.openqa.selenium.NoSuchElementException) {
             e.printStackTrace() //Распечатываем ошибку в консоль
             println("Мы поймали ошибку, и теперь тест не упадет")

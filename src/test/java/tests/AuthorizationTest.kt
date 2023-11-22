@@ -4,14 +4,15 @@ import MainActivity
 import TestFunctions.swipeOnScreen
 import general_cases_for_tests.AuthorizationScenarios.authorizationApp
 import general_cases_for_tests.AuthorizationScenarios.checkAuthorizationUser
+import io.qameta.allure.Description
 import org.testng.annotations.Test
 import screens.MenuApps
 import screens.Profile
 import java.util.concurrent.TimeUnit
 
 class AuthorizationTest : MainActivity() {
-
-    @Test
+    @Description("Тест авторизации из профиля")
+    @Test(description = "Тест авторизации из профиля")
     fun authorizationTest() {
 
         // проверка авторизации

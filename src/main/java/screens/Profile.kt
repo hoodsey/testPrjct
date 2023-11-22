@@ -7,13 +7,14 @@ import TestFunctions.clickToElement
 class Profile {
 
 
-    fun checkQuitButton(): Boolean {
+    fun checkQuitButton(findElementWithOutCatching: Boolean = false): Boolean {
         return checkAvailableElement(
                 locatorTypeAndroid = LocatorType.ACCESSIBILITY_ID,
                 locatorAndroid = quietButton.androidAccessibilityId,
                 locatorTypeIOS = LocatorType.ACCESSIBILITY_ID,
                 locatorIOS = quietButton.iosAccessibilityId,
-                elementName = quietButton.elementName
+                elementName = quietButton.elementName,
+                findElementWithOutCatching = findElementWithOutCatching
         )
     }
 
@@ -60,7 +61,7 @@ class Profile {
     private val addressButton = ScreenConstructor(
             androidAccessibilityId = "Мои адреса",
             iosAccessibilityId = "Мои адреса",
-            elementName = "Кнопка выхода из профиля"
+            elementName = "Кнопка перехода к окну Мои адреса"
     )
 
 }

@@ -5,6 +5,7 @@ import api_client.Post
 import api_client.Res
 import api_client.environment.Environment.endPoints
 import api_client.pojo.auth.AuthResetCodePojo
+import io.qameta.allure.Step
 import io.restassured.response.Response
 
 object AuthResetCode : Post, Res, AuthResetCodePojo() {
@@ -22,6 +23,7 @@ object AuthResetCode : Post, Res, AuthResetCodePojo() {
     }
 
     // отправка запроса POST auth/anonymous
+    @Step("Отправка запроса POST auth/anonymous")
     override fun post(reqBody: Any) {
         val responseJSON = postReq(
                 endPoint = endPoints.authCode,

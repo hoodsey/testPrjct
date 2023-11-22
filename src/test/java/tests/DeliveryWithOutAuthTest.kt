@@ -13,6 +13,7 @@ import general_cases_for_tests.DeliveryScenarios.checkShoppingCart
 import general_cases_for_tests.DeliveryScenarios.clickButtonOrder
 import general_cases_for_tests.FillingAddressScenarios.fillingAddress
 import general_cases_for_tests.FillingAddressScenarios.useLocation
+import io.qameta.allure.Description
 import org.testng.annotations.Test
 import screens.Cart
 import screens.MainPage
@@ -20,8 +21,8 @@ import screens.MenuApps
 import java.util.concurrent.TimeUnit
 
 class DeliveryWithOutAuthTest : MainActivity() {
-
-    @Test
+    @Description("Тест авторизации из оформления заказа")
+    @Test(description = "Тест авторизации из оформления заказа")
     fun deliveryWithOutAuthTest() {
 
         // инициализация сессии
