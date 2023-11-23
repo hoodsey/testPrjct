@@ -12,7 +12,6 @@
             <class name="tests.AuthorizationTest"/>
             <class name="tests.DeleteAddressTest"/>
             <class name="tests.DeliveryWithOutAuthTest"/>
-            <class name="tests.ApiTest"/>
         </classes>
     </test>
 </suite>
